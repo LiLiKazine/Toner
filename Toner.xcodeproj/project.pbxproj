@@ -13,6 +13,9 @@
 		09B435E021B96B6D0023B405 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09B435DF21B96B6D0023B405 /* Assets.xcassets */; };
 		09B435E321B96B6D0023B405 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B435E121B96B6D0023B405 /* LaunchScreen.storyboard */; };
 		09B435ED21B96EA50023B405 /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435EC21B96EA50023B405 /* Contants.swift */; };
+		09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435EF21B972B90023B405 /* BaseTonerViewController.swift */; };
+		09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435F121B972DD0023B405 /* BaseTonerNavigationController.swift */; };
+		09B435F421B973100023B405 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435F321B973100023B405 /* MainNavigationController.swift */; };
 		E8CAB9F3867A58951EBC0355 /* Pods_Toner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32017B551B806B7928DF98 /* Pods_Toner.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +28,9 @@
 		09B435E221B96B6D0023B405 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09B435E421B96B6D0023B405 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09B435EC21B96EA50023B405 /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
+		09B435EF21B972B90023B405 /* BaseTonerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTonerViewController.swift; sourceTree = "<group>"; };
+		09B435F121B972DD0023B405 /* BaseTonerNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTonerNavigationController.swift; sourceTree = "<group>"; };
+		09B435F321B973100023B405 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		8B32017B551B806B7928DF98 /* Pods_Toner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Toner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.debug.xcconfig"; sourceTree = "<group>"; };
 		F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.release.xcconfig"; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 		09B435D721B96B6A0023B405 /* Toner */ = {
 			isa = PBXGroup;
 			children = (
+				09B435EE21B972940023B405 /* Bases */,
 				09B435EA21B96E070023B405 /* Main */,
 				09B435EC21B96EA50023B405 /* Contants.swift */,
 				09B435D821B96B6A0023B405 /* AppDelegate.swift */,
@@ -76,10 +83,20 @@
 		09B435EA21B96E070023B405 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				09B435DA21B96B6A0023B405 /* MainViewController.swift */,
 				09B435DC21B96B6A0023B405 /* Main.storyboard */,
+				09B435DA21B96B6A0023B405 /* MainViewController.swift */,
+				09B435F321B973100023B405 /* MainNavigationController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		09B435EE21B972940023B405 /* Bases */ = {
+			isa = PBXGroup;
+			children = (
+				09B435EF21B972B90023B405 /* BaseTonerViewController.swift */,
+				09B435F121B972DD0023B405 /* BaseTonerNavigationController.swift */,
+			);
+			path = Bases;
 			sourceTree = "<group>";
 		};
 		99492E51812080D58838F32A /* Frameworks */ = {
@@ -231,8 +248,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09B435F421B973100023B405 /* MainNavigationController.swift in Sources */,
 				09B435DB21B96B6A0023B405 /* MainViewController.swift in Sources */,
 				09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */,
+				09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */,
+				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,
 				09B435ED21B96EA50023B405 /* Contants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
