@@ -65,6 +65,7 @@
                         <outlet property="analysisItem" destination="yhc-7r-9XB" id="0NW-6I-vZ2"/>
                         <outlet property="imgAuthorLbl" destination="7jL-IZ-0ZY" id="0Yw-3v-GxO"/>
                         <outlet property="importBtn" destination="miz-1h-DXS" id="Uxc-5O-ffO"/>
+                        <outlet property="targetImg" destination="dJS-aB-2iJ" id="KXq-cj-FNr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

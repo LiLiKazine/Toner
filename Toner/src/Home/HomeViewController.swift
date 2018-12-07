@@ -29,9 +29,15 @@ class HomeViewController: BaseTonerViewController {
         }
     }
     
+    private var picker: UIImagePickerController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
        
     }
     
@@ -41,6 +47,10 @@ class HomeViewController: BaseTonerViewController {
     }
     
     @IBAction func btnActions(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+           
+            self.present(picker, animated: true, completion: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,5 +59,20 @@ class HomeViewController: BaseTonerViewController {
         }
     }
 
+}
+
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("cancel selection")
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print(info)
+        if let image = info[.editedImage] as? UIImage {
+            targetImg.image = image
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
 }
 
