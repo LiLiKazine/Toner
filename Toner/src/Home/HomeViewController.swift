@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: BaseTonerViewController {
+class HomeViewController: BaseTonerViewController {
 
     
     @IBOutlet weak var analysisItem: UIBarButtonItem! {
@@ -16,7 +16,8 @@ class MainViewController: BaseTonerViewController {
             analysisItem.tintColor = MAIN_TINT
         }
     }
-    @IBOutlet weak var imgAuthorLbl: UILabel! 
+    @IBOutlet weak var targetImg: UIImageView!
+    @IBOutlet weak var imgAuthorLbl: UILabel!
     @IBOutlet weak var importBtn: UIButton! {
         didSet {
             importBtn.layer.cornerRadius = 21
@@ -42,6 +43,11 @@ class MainViewController: BaseTonerViewController {
     @IBAction func btnActions(_ sender: UIButton) {
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? AnalysisViewController {
+            dest.img4Anaylsis = targetImg.image ?? UIImage(named: "ExampleImage")
+        }
+    }
 
 }
 

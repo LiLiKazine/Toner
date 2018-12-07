@@ -12,7 +12,7 @@
         <!--Toner-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="Toner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Toner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SNU-an-W2c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,9 +53,11 @@
                         <viewLayoutGuide key="safeArea" id="GaZ-Sk-deq"/>
                     </view>
                     <navigationItem key="navigationItem" title="Toner" id="1Qg-Nt-dXj">
+                        <barButtonItem key="backBarButtonItem" title=" " id="qj4-5O-fwJ"/>
                         <barButtonItem key="rightBarButtonItem" title="Analysis" style="plain" id="yhc-7r-9XB">
                             <connections>
                                 <action selector="itemActions:" destination="BYZ-38-t0r" id="R4X-Pd-oN5"/>
+                                <segue destination="SV0-Bl-Qm1" kind="show" id="YaU-Cu-N6G"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -67,12 +69,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="996" y="27.436281859070466"/>
+            <point key="canvasLocation" x="865" y="687"/>
         </scene>
-        <!--Main Navigation Controller-->
+        <!--Toner-->
+        <scene sceneID="BiN-Wx-Sd3">
+            <objects>
+                <viewController storyboardIdentifier="AnalysisViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SV0-Bl-Qm1" customClass="AnalysisViewController" customModule="Toner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lko-AQ-cp5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="WL9-nb-MIn"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Toner" id="trk-pr-x6k">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="LR9-NG-K29"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="saveItem" destination="LR9-NG-K29" id="kMQ-ou-V8Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xic-yM-122" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1674" y="687"/>
+        </scene>
+        <!--Home Navigation Controller-->
         <scene sceneID="bEh-Ne-rjE">
             <objects>
-                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9bi-5B-cob" customClass="MainNavigationController" customModule="Toner" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="9bi-5B-cob" customClass="HomeNavigationController" customModule="Toner" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qEv-cN-RYk">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -91,4 +116,5 @@
     <resources>
         <image name="ExampleImage" width="1600" height="1200"/>
     </resources>
+    <color key="tintColor" red="0.84226947841305422" green="0.84226947841305422" blue="0.84226947841305422" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

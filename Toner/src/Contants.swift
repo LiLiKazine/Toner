@@ -16,6 +16,7 @@ let BAR_BACKGROUND = UIColor(hexString: "60424C")
 let COLOR_LIGHT_PINK = UIColor(hexString: "FF8F56")
 let COLOR_PINK = UIColor(hexString: "FF5959")
 let COLOR_BROWN = UIColor(hexString: "984A59")
+let COLOR_LIGHT_GRAY = UIColor(hexString: "D7D7D7")
 
 // Font Size
 let SIZE_MAIN_TITLE = 27

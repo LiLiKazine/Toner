@@ -1,20 +1,27 @@
 //
-//  MainNavigationController.swift
+//  AnalysisViewController.swift
 //  Toner
 //
-//  Created by LiLi Kazine on 2018/12/6.
+//  Created by LiLi Kazine on 2018/12/7.
 //  Copyright © 2018 HNA Group Co.,Ltd. All rights reserved.
 //
 
 import UIKit
 
-class MainNavigationController: BaseTonerNavigationController {
+class AnalysisViewController: BaseTonerViewController {
 
+    @IBOutlet weak var saveItem: UIBarButtonItem! {
+        didSet{
+            saveItem.tintColor = MAIN_TINT
+        }
+    }
+    
+    var img4Anaylsis: UIImage!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
-                                             .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
-        UINavigationBar.appearance().barTintColor = BAR_BACKGROUND
+
+        // Do any additional setup after loading the view.
     }
     
 

@@ -13,13 +13,13 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "strawberry@2x-1.png",
+      "filename" : "toner@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "strawberry@3x-1.png",
+      "filename" : "toner@3x.png",
       "scale" : "3x"
     },
     {
@@ -35,13 +35,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "strawberry@2x.png",
+      "filename" : "toner@2x-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "strawberry@3x.png",
+      "filename" : "toner@3x-1.png",
       "scale" : "3x"
     },
     {
