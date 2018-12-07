@@ -79,7 +79,32 @@
                     <view key="view" contentMode="scaleToFill" id="Lko-AQ-cp5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5H-wE-dUM">
+                                <rect key="frame" x="12" y="88" width="351" height="72"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="WjH-ws-QJ3"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l30-pJ-h8J" userLabel="Average Color">
+                                <rect key="frame" x="12" y="172" width="351" height="48"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="d0L-oL-stu"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="l30-pJ-h8J" firstAttribute="leading" secondItem="l5H-wE-dUM" secondAttribute="leading" id="Ek1-wA-KJZ"/>
+                            <constraint firstItem="l5H-wE-dUM" firstAttribute="centerX" secondItem="Lko-AQ-cp5" secondAttribute="centerX" id="YDS-CZ-o4m"/>
+                            <constraint firstItem="WL9-nb-MIn" firstAttribute="trailing" secondItem="l5H-wE-dUM" secondAttribute="trailing" constant="12" id="arP-dA-L1v"/>
+                            <constraint firstItem="l30-pJ-h8J" firstAttribute="trailing" secondItem="l5H-wE-dUM" secondAttribute="trailing" id="hZ7-bK-Kot"/>
+                            <constraint firstItem="l5H-wE-dUM" firstAttribute="leading" secondItem="WL9-nb-MIn" secondAttribute="leading" constant="12" id="mqH-65-mwz"/>
+                            <constraint firstItem="l5H-wE-dUM" firstAttribute="top" secondItem="WL9-nb-MIn" secondAttribute="top" constant="24" id="vaf-Il-eNr"/>
+                            <constraint firstItem="l30-pJ-h8J" firstAttribute="top" secondItem="l5H-wE-dUM" secondAttribute="bottom" constant="12" id="yin-yS-MLu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="WL9-nb-MIn"/>
                     </view>
                     <toolbarItems/>
@@ -88,6 +113,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="avgColorView" destination="l30-pJ-h8J" id="QS4-qS-gvM"/>
+                        <outlet property="colorStack" destination="l5H-wE-dUM" id="3SH-mq-z55"/>
                         <outlet property="saveItem" destination="LR9-NG-K29" id="kMQ-ou-V8Q"/>
                     </connections>
                 </viewController>

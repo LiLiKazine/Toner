@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ChameleonFramework
+import SnapKit
 
 class AnalysisViewController: BaseTonerViewController {
 
@@ -15,13 +17,37 @@ class AnalysisViewController: BaseTonerViewController {
             saveItem.tintColor = MAIN_TINT
         }
     }
+    @IBOutlet weak var colorStack: UIStackView!
+    @IBOutlet weak var avgColorView: UIView!
     
     var img4Anaylsis: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        let colors = ColorsFromImage(img4Anaylsis, withFlatScheme: true)
+        colors.forEach{ color in
+            let patch = UIView()
+            patch.backgroundColor = color
+            colorStack.addArrangedSubview(patch)
+            patch.snp.makeConstraints{make in
+                let width = Int(colorStack.bounds.width) / colors.count
+                let height = colorStack.bounds.height
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
+        }
+        print(colors)
+        let avg = AverageColorFromImage(img4Anaylsis)
+        avgColorView.backgroundColor = avg
+        let ratios: [(color: UIColor, ratio: Double)] = Tools.analyze(image: img4Anaylsis)
+        print(ratios)
+    }
+    
+    
+    deinit {
+        for view in colorStack.subviews {
+            view.removeFromSuperview()
+        }
     }
     
 

@@ -11,11 +11,7 @@ import UIKit
 class HomeViewController: BaseTonerViewController {
 
     
-    @IBOutlet weak var analysisItem: UIBarButtonItem! {
-        didSet {
-            analysisItem.tintColor = MAIN_TINT
-        }
-    }
+    @IBOutlet weak var analysisItem: UIBarButtonItem!
     @IBOutlet weak var targetImg: UIImageView!
     @IBOutlet weak var imgAuthorLbl: UILabel!
     @IBOutlet weak var importBtn: UIButton! {
@@ -37,7 +33,9 @@ class HomeViewController: BaseTonerViewController {
         picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
+        picker.allowsEditing = false
+        picker.navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
+                                                    .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
        
     }
     
@@ -65,11 +63,13 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         print("cancel selection")
+        picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print(info)
-        if let image = info[.editedImage] as? UIImage {
+//        if let image = info[.editedImage] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             targetImg.image = image
         }
         picker.dismiss(animated: true, completion: nil)

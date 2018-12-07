@@ -15,6 +15,7 @@ class HomeNavigationController: BaseTonerNavigationController {
         navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
                                              .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
         UINavigationBar.appearance().barTintColor = BAR_BACKGROUND
+        UINavigationBar.appearance().tintColor = MAIN_TINT
     }
     
 
