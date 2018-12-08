@@ -9,6 +9,8 @@
 import UIKit
 import ChameleonFramework
 import SnapKit
+import NVActivityIndicatorView
+import Photos
 
 class AnalysisViewController: BaseTonerViewController {
 
@@ -18,47 +20,225 @@ class AnalysisViewController: BaseTonerViewController {
         }
     }
     @IBOutlet weak var colorStack: UIStackView!
+    @IBOutlet weak var colorValueStack: UIStackView!
     @IBOutlet weak var avgColorView: UIView!
+    @IBOutlet weak var avgColorValueLbl: UILabel!
+    @IBOutlet weak var loading: NVActivityIndicatorView!
+    @IBOutlet weak var targetImgView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var img4Anaylsis: UIImage!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let colors = ColorsFromImage(img4Anaylsis, withFlatScheme: true)
-        colors.forEach{ color in
-            let patch = UIView()
-            patch.backgroundColor = color
-            colorStack.addArrangedSubview(patch)
-            patch.snp.makeConstraints{make in
-                let width = Int(colorStack.bounds.width) / colors.count
-                let height = colorStack.bounds.height
-                make.width.equalTo(width)
-                make.height.equalTo(height)
+    var shrink: UIImage!
+    
+    
+    private var tasks: Int = 3 {
+        didSet {
+            if tasks == 0 {
+                loading.stopAnimating()
             }
         }
-        print(colors)
-        let avg = AverageColorFromImage(img4Anaylsis)
-        avgColorView.backgroundColor = avg
-        let ratios: [(color: UIColor, ratio: Double)] = Tools.analyze(image: img4Anaylsis)
-        print(ratios)
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        shrink = img4Anaylsis.shrink()
+        
+        targetImgView.image = img4Anaylsis
+
+        loading.startAnimating()
+        
+        setStack()
+        
+        setAvg()
+        
+        
+    }
+    @IBAction func itemAction(_ sender: UIBarButtonItem) {
+        
+        UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, false, 0.0)
+
+        let savedContentOffset = scrollView.contentOffset
+        let savedFrame = scrollView.frame
+
+        scrollView.contentOffset = CGPoint.zero
+        scrollView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
+
+        scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+
+        scrollView.contentOffset = savedContentOffset
+        scrollView.frame = savedFrame
+
+        UIGraphicsEndImageContext()
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: image!)
+        }) { (isSuccess: Bool, error: Error?) in
+            DispatchQueue.main.async { [weak self] in
+                self?.showSaveAlbumAlert(isSuccess: isSuccess, err: error)
+            }
+            if !isSuccess {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    private func showSaveAlbumAlert(isSuccess: Bool, err: Error?) {
+        let title = isSuccess ? "Succeeded" : "Failed"
+        let tip = isSuccess ? "Successfully Saved Photo to Album." : err?.localizedDescription
+        let alertController = UIAlertController(title: title,
+        message: tip, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+        action in
+        print("OK")
+        })
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    
+    }
+    
+    private func setAvg() {
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else { return }
+            let avg = AverageColorFromImage(strongSelf.shrink)
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.avgColorView.backgroundColor = avg
+                strongSelf.avgColorValueLbl.text = avg.hexValue()
+                strongSelf.tasks -= 1
+            }
+            
+        }
+        
+    }
+    
+    private func setStack() {
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else { return }
+            var colors = ColorsFromImage(strongSelf.shrink, withFlatScheme: true)
+            var record = [UIColor: Int]()
+            var dups = [Int]()
+            for i in 0 ..< colors.count {
+                let color = colors[i]
+                if record.keys.contains(color) {
+                    dups.append(i)
+                } else {
+                    record[color] = 1
+                }
+            }
+            dups.reverse()
+            dups.forEach{ idx in
+                colors.remove(at: idx)
+            }
+            DispatchQueue.main.async {  [weak self] in
+                guard let strongSelf = self else { return }
+                colors.forEach{ color in
+                    let patch = UIView()
+                    patch.backgroundColor = color
+                    strongSelf.colorStack.addArrangedSubview(patch)
+                    patch.snp.makeConstraints{make in
+                        let width = Int(strongSelf.colorStack.bounds.width) / colors.count
+                        let height = strongSelf.colorStack.bounds.height
+                        make.width.equalTo(width)
+                        make.height.equalTo(height)
+                    }
+                    let val = UILabel()
+                    val.textAlignment = .center
+                    val.textColor = COLOR_BROWN
+                    val.text = color.hexValue()
+                    val.font = UIFont.systemFont(ofSize: SIZE_ANNOTATION)
+                    strongSelf.colorValueStack.addArrangedSubview(val)
+                    val.snp.makeConstraints{ make in
+                        let width = Int(strongSelf.colorValueStack.bounds.width) / colors.count
+                        let height = strongSelf.colorValueStack.bounds.height
+                        make.width.equalTo(width)
+                        make.height.equalTo(height)
+                    }
+                }
+                strongSelf.tasks -= 1
+            }
+            
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if loading.isAnimating {
+            loading.stopAnimating()
+        }
+    }
     
     deinit {
         for view in colorStack.subviews {
             view.removeFromSuperview()
         }
+        for view in colorValueStack.subviews {
+            view.removeFromSuperview()
+        }
     }
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let dest = segue.destination as? PieChartViewController {
+            dest.img4Anaylsis = img4Anaylsis
+            dest.taskDone = { [weak self] in
+                self?.tasks -= 1
+            }
+        }
     }
-    */
 
+}
+
+fileprivate extension UIScrollView {
+    func screenshot()->UIImage{
+        var image = UIImage();
+        
+        UIGraphicsBeginImageContextWithOptions(self.contentSize, false, UIScreen.main.scale)
+        
+        // save initial values
+        let savedContentOffset = self.contentOffset;
+        let savedFrame = self.frame;
+        let savedBackgroundColor = self.backgroundColor
+        
+        // reset offset to top left point
+        self.contentOffset = CGPoint.zero;
+        // set frame to content size
+        self.frame = CGRect(x: 0, y: 0, width: self.contentSize.width, height: self.contentSize.height);
+        // remove background
+//        self.backgroundColor = UIColor.clear
+        
+        // make temp view with scroll view content size
+        // a workaround for issue when image on ipad was drawn incorrectly
+        let tempView = UIView(frame: CGRect(x: 0, y: 0, width: self.contentSize.width, height: self.contentSize.height))
+        
+        // save superview
+        let tempSuperView = self.superview
+        // remove scrollView from old superview
+        self.removeFromSuperview()
+        // and add to tempView
+        tempView.addSubview(self)
+        
+        // render view
+        // drawViewHierarchyInRect not working correctly
+        tempView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        // and get image
+        image = UIGraphicsGetImageFromCurrentImageContext()!;
+        
+        // and return everything back
+        tempView.subviews[0].removeFromSuperview()
+        tempSuperView?.addSubview(self)
+        
+        // restore saved settings
+        self.contentOffset = savedContentOffset;
+        self.frame = savedFrame;
+        self.backgroundColor = savedBackgroundColor
+        
+        UIGraphicsEndImageContext();
+        
+        return image
+    }
 }

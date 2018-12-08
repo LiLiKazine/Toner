@@ -36,16 +36,68 @@ class Tools: NSObject {
                 }
             }
         }
-//        let colorVal = colors.values.sorted{ $0 > $1 }
-        for key in colors.keys {
-            let rgb = key.split(separator: "-")
-            let r = CGFloat(truncating: NumberFormatter().number(from: String(rgb[0]))!)
-            let g = CGFloat(truncating: NumberFormatter().number(from: String(rgb[1]))!)
-            let b = CGFloat(truncating: NumberFormatter().number(from: String(rgb[2]))!)
-            let color = UIColor(red: r, green: g, blue: b, alpha: 1)
-            let rate = colors[key]! / colorCount
-            let ratio = (color, rate)
-            ratios.append(ratio)
+        let sorted = assort(colors: Array(colors.keys), threshold: 0)
+        ratios = merge(sorted: sorted, data: colors, colorCount: colorCount)
+        return ratios
+    }
+    
+    static func dec2hex(dec: Int) -> String {
+        return String(dec, radix: 16)
+    }
+    
+    static func assort(colors: [String], threshold: Int) -> [String: [String]] {
+        var sorted = [String: [String]]()
+        // divide rgb space into 15*15*15 chunks
+        for color in colors {
+            let rgb = color.split(separator: "-")
+            let r = Int(rgb[0])!
+            let g = Int(rgb[1])!
+            let b = Int(rgb[2])!
+            let key = "\(r/51)\(g/51)\(b/51)"
+            if sorted.keys.contains(key) {
+                sorted[key]!.append(color)
+            } else {
+                sorted[key] = [color]
+            }
+        }
+        return sorted
+    }
+    
+    static func merge(sorted: [String: [String]], data: [String: Double], colorCount: Double) -> [(color: UIColor, ratio: Double)] {
+        var ratios = [(color: UIColor, ratio: Double)]()
+        for group in sorted {
+            let rgbGroup = group.value
+            var ratioGroup = [Double]()
+            for rgb in rgbGroup {
+                let ratio = data[rgb]! / colorCount
+                ratioGroup.append(ratio)
+            }
+            let total = ratioGroup.reduce(0, { $0 + $1 })
+            var avgR = 0.0
+            var avgG = 0.0
+            var avgB = 0.0
+            for i in 0 ..< ratioGroup.count {
+                let weight = ratioGroup[i] / total
+                let rgb = rgbGroup[i].split(separator: "-")
+                let r = Double(rgb[0])!
+                let g = Double(rgb[1])!
+                let b = Double(rgb[2])!
+                avgR += r * weight
+                avgG += g * weight
+                avgB += b * weight
+            }
+//            for i in 0 ..< ratioGroup.count {
+//                let count = Double(ratioGroup.count)
+//                let rgb = rgbGroup[i].split(separator: "-")
+//                let r = Double(rgb[0])!
+//                let g = Double(rgb[1])!
+//                let b = Double(rgb[2])!
+//                avgR += r / count
+//                avgG += g / count
+//                avgB += b / count
+//            }
+            let tuple = (UIColor(red: CGFloat(avgR / 255.0), green: CGFloat(avgG / 255.0), blue: CGFloat(avgB / 255.0), alpha: 1), total)
+            ratios.append(tuple)
         }
         return ratios
     }

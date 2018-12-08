@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class HomeViewController: BaseTonerViewController {
 
@@ -26,10 +27,11 @@ class HomeViewController: BaseTonerViewController {
     }
     
     private var picker: UIImagePickerController!
-    
+    private var loading: NVActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .photoLibrary
@@ -62,12 +64,11 @@ class HomeViewController: BaseTonerViewController {
 extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("cancel selection")
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        print(info)
+        imgAuthorLbl.isHidden = true
 //        if let image = info[.editedImage] as? UIImage {
         if let image = info[.originalImage] as? UIImage {
             targetImg.image = image

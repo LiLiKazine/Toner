@@ -17,10 +17,14 @@ let COLOR_LIGHT_PINK = UIColor(hexString: "FF8F56")
 let COLOR_PINK = UIColor(hexString: "FF5959")
 let COLOR_BROWN = UIColor(hexString: "984A59")
 let COLOR_LIGHT_GRAY = UIColor(hexString: "D7D7D7")
+let COLOR_CONTENT_BACKGROUND = UIColor(hexString: "FDF1DB")
 
 // Font Size
-let SIZE_MAIN_TITLE = 27
+let SIZE_MAIN_TITLE: CGFloat = 27
 //let SIZE_BAR_ITEM =
-let SIZE_BUTTON_LARGE = 27
-let SIZE_ANNOTATION = 12
+let SIZE_BUTTON_LARGE: CGFloat = 27
+let SIZE_ANNOTATION: CGFloat = 12
+let SIZE_NORMAL_LABEL: CGFloat = 17
 
+let DEVICE_WIDTH = UIScreen.main.bounds.width
+let DEVICE_HEIGHT = UIScreen.main.bounds.height

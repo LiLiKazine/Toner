@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0905BA7521BACC8F008A5933 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905BA7421BACC8F008A5933 /* Tools.swift */; };
+		09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */; };
+		09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */; };
 		09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435D821B96B6A0023B405 /* AppDelegate.swift */; };
 		09B435DB21B96B6A0023B405 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435DA21B96B6A0023B405 /* HomeViewController.swift */; };
 		09B435DE21B96B6A0023B405 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B435DC21B96B6A0023B405 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		0905BA7421BACC8F008A5933 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
+		09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		09B435D521B96B6A0023B405 /* Toner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B435D821B96B6A0023B405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B435DA21B96B6A0023B405 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09A6A6BE21BC1DE600140AFA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		09B435CC21B96B650023B405 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +100,7 @@
 				09B435EE21B972940023B405 /* Bases */,
 				09D5564821BA96460056D40E /* Home */,
 				09D5564921BA98C80056D40E /* Analysis */,
+				09A6A6BE21BC1DE600140AFA /* Extensions */,
 				09B435DC21B96B6A0023B405 /* Main.storyboard */,
 				09B435EC21B96EA50023B405 /* Contants.swift */,
 				0905BA7421BACC8F008A5933 /* Tools.swift */,
@@ -117,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				09D5564A21BA98E60056D40E /* AnalysisViewController.swift */,
+				09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -232,30 +246,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Toner/Pods-Toner-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
-				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
-				"${BUILT_PRODUCTS_DIR}/RxOptional/RxOptional.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxOptional.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,9 +273,11 @@
 				09B435F421B973100023B405 /* HomeNavigationController.swift in Sources */,
 				09B435DB21B96B6A0023B405 /* HomeViewController.swift in Sources */,
 				09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */,
+				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
 				09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */,
 				09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */,
 				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,
+				09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */,
 				09B435ED21B96EA50023B405 /* Contants.swift in Sources */,
 				0905BA7521BACC8F008A5933 /* Tools.swift in Sources */,
 			);
@@ -424,10 +426,11 @@
 			baseConfigurationReference = AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ALC8X8425P;
 				INFOPLIST_FILE = Toner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -444,10 +447,11 @@
 			baseConfigurationReference = F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ALC8X8425P;
 				INFOPLIST_FILE = Toner/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
