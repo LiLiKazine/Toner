@@ -2,5 +2,5 @@
 # Toner
 
 ![toner](/toner57px.png)
-
-<a href="itms-services://?action=download-manifest&url=https://github.com/LiLiKazine/Toner/blob/master/manifest.plist">点击开始安装App</a>
+itms-services://?action=download-manifest&url=http://148.70.109.94/home/ubuntu/manifest.plist
+<a href="">点击开始安装App</a>

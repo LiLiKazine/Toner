@@ -26,20 +26,12 @@ class PieChartViewController: BaseTonerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        shrink = img4Anaylsis.shrink()
-        
+        let imgWidth = img4Anaylsis.size.width
+        shrink = img4Anaylsis.shrink(target: imgWidth > 800.0 ? 800.0 : imgWidth)
+
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
-            var ratios: [(color: UIColor, ratio: Double)] = Tools.analyze(image: strongSelf.shrink)
-            var per = 0.0
-            ratios = ratios.filter{ (color, ratio) in
-                if ratio > 0.05 {
-                    per += ratio
-                }
-                return ratio > 0.05
-            }
-
+            let ratios: [(color: UIColor, ratio: Double)] = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 7)
 
             let dataEntries = ratios.map { (color, ratio) -> PieChartDataEntry in
                 let entry = PieChartDataEntry(value: ratio, label: color.hexValue())

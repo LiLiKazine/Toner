@@ -10,6 +10,68 @@
 import UIKit
 
 class Tools: NSObject {
+    static func analyzeWithKMeans(image: UIImage, count: Int) -> [(color: UIColor, ratio: Double)] {
+        var ratios = [(color: UIColor, ratio: Double)]()
+        guard let provider = image.cgImage?.dataProvider, let pxData = provider.data, let cfData = CFDataGetBytePtr(pxData) else {
+            return ratios
+        }
+        let dataLength = CFDataGetLength(pxData)
+        let channelNum = 4 //RGBA
+        var colors = [String: Double]() //kye: R-G-B val: num
+        var colorCount: Double = 0
+        var idx = 0
+        while idx < dataLength {
+            idx += channelNum
+            if cfData[idx+3] != 0 {
+                // not transparent
+                colorCount += 1
+                let red = cfData[idx]
+                let green = cfData[idx+1]
+                let blue = cfData[idx+2]
+                let key = "\(red)-\(green)-\(blue)"
+                if !colors.keys.contains(key) {
+                    colors[key] = 1
+                } else {
+                    colors[key] = colors[key]! + 1.0
+                }
+            }
+        }
+        ratios = kMeans(ratios: colors, labels: count)
+        return ratios
+    }
+    
+    static func kMeans(ratios: [String: Double], labels: Int) -> [(color: UIColor, ratio: Double)] {
+        let colors = Array(ratios.keys)
+        let points: [Vector] = colors.compactMap{ str -> Vector in
+            let rgb = str.split(separator: "-")
+            let r = Double(rgb[0])!
+            let g = Double(rgb[1])!
+            let b = Double(rgb[2])!
+            let data = [r, g, b]
+            return Vector(data)
+        }
+        
+        let labels: [Int] = Array(1...labels)
+        
+        let kmm = KMeans<Int>(labels: labels)
+        kmm.trainCenters(points, convergeDistance: 10.0)
+        let centroid = kmm.centroids
+        let classify = kmm.classify
+        let total = classify.map{$0.count}.reduce(0, {$0+$1})
+        var newRatio =  [(color: UIColor, ratio: Double)]()
+        for i in 0..<labels.count {
+            let clr = centroid[i].data
+            let color = UIColor(red: CGFloat(clr[2]/255), green: CGFloat(clr[1]/255), blue: CGFloat(clr[0]/255), alpha: 1)
+            let count = classify[i].count
+            newRatio.append((color, Double(count)/Double(total)))
+        }
+        return newRatio
+    }
+    
+    static func dec2hex(dec: Int) -> String {
+        return String(dec, radix: 16)
+    }
+    
     static func analyze(image: UIImage) -> [(color: UIColor, ratio: Double)] {
         var ratios = [(color: UIColor, ratio: Double)]()
         guard let provider = image.cgImage?.dataProvider, let pxData = provider.data, let cfData = CFDataGetBytePtr(pxData) else {
@@ -39,10 +101,6 @@ class Tools: NSObject {
         let sorted = assort(colors: Array(colors.keys), threshold: 0)
         ratios = merge(sorted: sorted, data: colors, colorCount: colorCount)
         return ratios
-    }
-    
-    static func dec2hex(dec: Int) -> String {
-        return String(dec, radix: 16)
     }
     
     static func assort(colors: [String], threshold: Int) -> [String: [String]] {

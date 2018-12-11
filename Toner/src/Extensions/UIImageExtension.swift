@@ -9,16 +9,16 @@
 import UIKit
 
 extension UIImage {
-    func shrink() -> UIImage {
+    func shrink(target: CGFloat) -> UIImage {
         guard let image = self.copy() as? UIImage else {
             return self
         }
         let size = image.size
-        if size.width < 800 {
+        if size.width < target {
             return image
         }
         
-        let widthRatio  = 800.0  / size.width
+        let widthRatio  = target  / size.width
         let heightRatio = widthRatio * size.height
         
         // Figure out what our orientation is, and use that to form the rectangle

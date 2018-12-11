@@ -20,6 +20,8 @@
 		09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435F121B972DD0023B405 /* BaseTonerNavigationController.swift */; };
 		09B435F421B973100023B405 /* HomeNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435F321B973100023B405 /* HomeNavigationController.swift */; };
 		09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5564A21BA98E60056D40E /* AnalysisViewController.swift */; };
+		09E0140821BCD4EA009785FD /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0140721BCD4EA009785FD /* KMeans.swift */; };
+		09E0140A21BCD948009785FD /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0140921BCD948009785FD /* Vector.swift */; };
 		E8CAB9F3867A58951EBC0355 /* Pods_Toner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32017B551B806B7928DF98 /* Pods_Toner.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		09B435F121B972DD0023B405 /* BaseTonerNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTonerNavigationController.swift; sourceTree = "<group>"; };
 		09B435F321B973100023B405 /* HomeNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigationController.swift; sourceTree = "<group>"; };
 		09D5564A21BA98E60056D40E /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
+		09E0140721BCD4EA009785FD /* KMeans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
+		09E0140921BCD948009785FD /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		8B32017B551B806B7928DF98 /* Pods_Toner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Toner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.debug.xcconfig"; sourceTree = "<group>"; };
 		F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +108,8 @@
 				09B435DC21B96B6A0023B405 /* Main.storyboard */,
 				09B435EC21B96EA50023B405 /* Contants.swift */,
 				0905BA7421BACC8F008A5933 /* Tools.swift */,
+				09E0140721BCD4EA009785FD /* KMeans.swift */,
+				09E0140921BCD948009785FD /* Vector.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -182,7 +188,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = "HNA Group Co.,Ltd";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					09B435D421B96B690023B405 = {
 						CreatedOnToolsVersion = 10.1;
@@ -271,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09B435F421B973100023B405 /* HomeNavigationController.swift in Sources */,
+				09E0140821BCD4EA009785FD /* KMeans.swift in Sources */,
 				09B435DB21B96B6A0023B405 /* HomeViewController.swift in Sources */,
 				09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */,
 				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
@@ -279,6 +286,7 @@
 				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,
 				09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */,
 				09B435ED21B96EA50023B405 /* Contants.swift in Sources */,
+				09E0140A21BCD948009785FD /* Vector.swift in Sources */,
 				0905BA7521BACC8F008A5933 /* Tools.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,8 +434,8 @@
 			baseConfigurationReference = AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ALC8X8425P;
 				INFOPLIST_FILE = Toner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -435,8 +443,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hna.mobile.Toner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hna.eking.mobile.Toner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "eKing Profile";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -447,8 +456,8 @@
 			baseConfigurationReference = F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = ALC8X8425P;
 				INFOPLIST_FILE = Toner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -456,8 +465,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.hna.mobile.Toner;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hna.eking.mobile.Toner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "eKing Profile";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

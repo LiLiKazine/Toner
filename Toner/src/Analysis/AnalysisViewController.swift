@@ -42,8 +42,10 @@ class AnalysisViewController: BaseTonerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        shrink = img4Anaylsis.shrink()
+        let imgWidth = img4Anaylsis.size.width
+
+        print(imgWidth)
+        shrink = img4Anaylsis.shrink(target: imgWidth > 800.0 ? 800.0 : imgWidth)
         
         targetImgView.image = img4Anaylsis
 
@@ -116,7 +118,9 @@ class AnalysisViewController: BaseTonerViewController {
     private func setStack() {
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
-            var colors = ColorsFromImage(strongSelf.shrink, withFlatScheme: true)
+            
+//            var colors = ColorsFromImage(strongSelf.shrink, withFlatScheme: true)
+            var colors = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 7).map{$0.color}
             var record = [UIColor: Int]()
             var dups = [Int]()
             for i in 0 ..< colors.count {

@@ -8,6 +8,7 @@
 
 import UIKit
 import NVActivityIndicatorView
+import Photos
 
 class HomeViewController: BaseTonerViewController {
 
