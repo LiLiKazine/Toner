@@ -9,8 +9,8 @@
 import UIKit
 import ChameleonFramework
 import SnapKit
-import NVActivityIndicatorView
 import Photos
+import SkeletonView
 
 class AnalysisViewController: BaseTonerViewController {
 
@@ -23,7 +23,6 @@ class AnalysisViewController: BaseTonerViewController {
     @IBOutlet weak var colorValueStack: UIStackView!
     @IBOutlet weak var avgColorView: UIView!
     @IBOutlet weak var avgColorValueLbl: UILabel!
-    @IBOutlet weak var loading: NVActivityIndicatorView!
     @IBOutlet weak var targetImgView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -32,16 +31,16 @@ class AnalysisViewController: BaseTonerViewController {
     var shrink: UIImage!
     
     
-    private var tasks: Int = 3 {
-        didSet {
-            if tasks == 0 {
-                loading.stopAnimating()
-            }
-        }
-    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        view.showAnimatedGradientSkeleton()
+        let gradient = SkeletonGradient(baseColor: MAIN_TINT_DARK)
+        colorStack.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
+        colorValueStack.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
+        
         let imgWidth = img4Anaylsis.size.width
 
         print(imgWidth)
@@ -49,7 +48,6 @@ class AnalysisViewController: BaseTonerViewController {
         
         targetImgView.image = img4Anaylsis
 
-        loading.startAnimating()
         
         setStack()
         
@@ -108,7 +106,6 @@ class AnalysisViewController: BaseTonerViewController {
                 guard let strongSelf = self else { return }
                 strongSelf.avgColorView.backgroundColor = avg
                 strongSelf.avgColorValueLbl.text = avg.hexValue()
-                strongSelf.tasks -= 1
             }
             
         }
@@ -120,7 +117,7 @@ class AnalysisViewController: BaseTonerViewController {
             guard let strongSelf = self else { return }
             
 //            var colors = ColorsFromImage(strongSelf.shrink, withFlatScheme: true)
-            var colors = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 7).map{$0.color}
+            var colors = Tools.analyzeWithKMeans(image: strongSelf.img4Anaylsis, count: 5).map{$0.color}
             var record = [UIColor: Int]()
             var dups = [Int]()
             for i in 0 ..< colors.count {
@@ -137,6 +134,10 @@ class AnalysisViewController: BaseTonerViewController {
             }
             DispatchQueue.main.async {  [weak self] in
                 guard let strongSelf = self else { return }
+                
+                strongSelf.colorStack.hideSkeleton()
+                strongSelf.colorValueStack.hideSkeleton()
+                
                 colors.forEach{ color in
                     let patch = UIView()
                     patch.backgroundColor = color
@@ -160,7 +161,6 @@ class AnalysisViewController: BaseTonerViewController {
                         make.height.equalTo(height)
                     }
                 }
-                strongSelf.tasks -= 1
             }
             
         }
@@ -168,9 +168,7 @@ class AnalysisViewController: BaseTonerViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if loading.isAnimating {
-            loading.stopAnimating()
-        }
+
     }
     
     deinit {
@@ -189,9 +187,8 @@ class AnalysisViewController: BaseTonerViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? PieChartViewController {
             dest.img4Anaylsis = img4Anaylsis
-            dest.taskDone = { [weak self] in
-                self?.tasks -= 1
-            }
+//            dest.taskDone = { [weak self] in
+//            }
         }
     }
 

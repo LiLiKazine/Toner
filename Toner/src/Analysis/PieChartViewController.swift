@@ -8,6 +8,7 @@
 
 import UIKit
 import Charts
+import SkeletonView
 
 class PieChartViewController: BaseTonerViewController {
 
@@ -26,12 +27,17 @@ class PieChartViewController: BaseTonerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        view.showAnimatedGradientSkeleton()
+        let gradient = SkeletonGradient(baseColor: BAR_BACKGROUND!)
+        pieView.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
+        
         let imgWidth = img4Anaylsis.size.width
         shrink = img4Anaylsis.shrink(target: imgWidth > 800.0 ? 800.0 : imgWidth)
 
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
-            let ratios: [(color: UIColor, ratio: Double)] = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 7)
+            let ratios: [(color: UIColor, ratio: Double)] = Tools.analyzeWithKMeans(image: strongSelf.img4Anaylsis, count: 5)
 
             let dataEntries = ratios.map { (color, ratio) -> PieChartDataEntry in
                 let entry = PieChartDataEntry(value: ratio, label: color.hexValue())
@@ -57,7 +63,8 @@ class PieChartViewController: BaseTonerViewController {
                 strongSelf.pieView.holeRadiusPercent = 0.3
                 strongSelf.pieView.data = chartData
                 strongSelf.pieView.rotationEnabled = false
-                strongSelf.taskDone()
+                strongSelf.pieView.hideSkeleton()
+//                strongSelf.taskDone()
             }
 
         }

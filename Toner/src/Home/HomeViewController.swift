@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import NVActivityIndicatorView
 import Photos
 
 class HomeViewController: BaseTonerViewController {
@@ -28,7 +27,6 @@ class HomeViewController: BaseTonerViewController {
     }
     
     private var picker: UIImagePickerController!
-    private var loading: NVActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -91,6 +91,9 @@
                                             <constraint firstAttribute="width" constant="48" id="Awq-lt-xFG"/>
                                             <constraint firstAttribute="height" constant="48" id="HkI-nC-5p4"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x7U-d4-aFF">
                                         <rect key="frame" x="12" y="259" width="71.5" height="20.5"/>
@@ -109,18 +112,27 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="72" id="VA2-TY-t1D"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dff-p5-gdc" userLabel="Color Value View">
                                         <rect key="frame" x="20" y="393.5" width="335" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="ptt-dK-o82"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </stackView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJs-ix-Wnb">
                                         <rect key="frame" x="19" y="423.5" width="337.5" height="337.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="dJs-ix-Wnb" secondAttribute="height" multiplier="1:1" id="aOw-7U-nzN"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <segue destination="PGw-bZ-dKc" kind="embed" id="QAW-eW-lfG"/>
                                         </connections>
@@ -130,12 +142,16 @@
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Zgk-Uh-N8r" secondAttribute="height" multiplier="16:9" id="NdB-h8-yG6"/>
                                         </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99215686270000003" green="0.94509803920000002" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Zgk-Uh-N8r" secondAttribute="trailing" constant="12" id="1W4-Px-aMh"/>
                                     <constraint firstItem="2Jb-ct-msk" firstAttribute="centerX" secondItem="j3P-73-H7H" secondAttribute="centerX" id="32f-RB-DPC"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jWj-AR-2TL" secondAttribute="trailing" constant="20" symbolic="YES" id="3PV-1M-qT9"/>
                                     <constraint firstItem="dJs-ix-Wnb" firstAttribute="width" secondItem="j3P-73-H7H" secondAttribute="width" multiplier="0.9" id="8BL-eM-SdR"/>
                                     <constraint firstItem="Zgk-Uh-N8r" firstAttribute="leading" secondItem="j3P-73-H7H" secondAttribute="leading" constant="12" id="8xl-kj-pG3"/>
                                     <constraint firstItem="zJi-f7-ozu" firstAttribute="top" secondItem="Zgk-Uh-N8r" secondAttribute="bottom" constant="24" id="9Y0-QL-zEx"/>
@@ -156,32 +172,13 @@
                                     <constraint firstItem="2Jb-ct-msk" firstAttribute="leading" secondItem="j3P-73-H7H" secondAttribute="leadingMargin" constant="12" id="rQO-cp-ISE"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zzr-zM-bXU" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="151.5" y="214" width="72" height="72"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="GBH-yB-Xqn"/>
-                                    <constraint firstAttribute="height" constant="72" id="i2n-da-vpT"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="lineScalePulseOut"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.59607843140000005" green="0.2901960784" blue="0.34901960780000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                        <real key="value" value="4"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Zzr-zM-bXU" firstAttribute="centerX" secondItem="Lko-AQ-cp5" secondAttribute="centerX" id="0xb-6m-QGu"/>
                             <constraint firstItem="j3P-73-H7H" firstAttribute="trailing" secondItem="WL9-nb-MIn" secondAttribute="trailing" id="Ifu-Ng-tNg"/>
                             <constraint firstItem="j3P-73-H7H" firstAttribute="top" secondItem="WL9-nb-MIn" secondAttribute="top" id="Vjj-VS-GRP"/>
                             <constraint firstItem="j3P-73-H7H" firstAttribute="leading" secondItem="WL9-nb-MIn" secondAttribute="leading" id="abt-PR-9dN"/>
                             <constraint firstItem="j3P-73-H7H" firstAttribute="bottom" secondItem="Lko-AQ-cp5" secondAttribute="bottom" id="naA-Dj-TMU"/>
-                            <constraint firstItem="Zzr-zM-bXU" firstAttribute="centerY" secondItem="Lko-AQ-cp5" secondAttribute="centerY" multiplier="0.75" id="oYx-Zt-bPi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="WL9-nb-MIn"/>
                     </view>
@@ -199,7 +196,6 @@
                         <outlet property="avgColorView" destination="zJi-f7-ozu" id="G4h-qh-5f6"/>
                         <outlet property="colorStack" destination="2Jb-ct-msk" id="fKV-cZ-UKx"/>
                         <outlet property="colorValueStack" destination="dff-p5-gdc" id="kDh-Nk-Mr7"/>
-                        <outlet property="loading" destination="Zzr-zM-bXU" id="veE-rb-eXU"/>
                         <outlet property="saveItem" destination="LR9-NG-K29" id="kMQ-ou-V8Q"/>
                         <outlet property="scrollView" destination="j3P-73-H7H" id="ubN-XS-mSe"/>
                         <outlet property="targetImgView" destination="Zgk-Uh-N8r" id="JpF-FS-fhk"/>
@@ -241,6 +237,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JPK-5w-xPB" secondAttribute="height" multiplier="1:1" id="xlJ-c1-FzI"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -250,6 +249,9 @@
                             <constraint firstItem="JPK-5w-xPB" firstAttribute="centerX" secondItem="yVh-QO-wa7" secondAttribute="centerX" id="Noh-e0-XdH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jyh-fE-sQr"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
                         <outlet property="pieView" destination="JPK-5w-xPB" id="hLR-3f-r7l"/>
