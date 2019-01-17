@@ -117,7 +117,7 @@ class AnalysisViewController: BaseTonerViewController {
             guard let strongSelf = self else { return }
             
 //            var colors = ColorsFromImage(strongSelf.shrink, withFlatScheme: true)
-            var colors = Tools.analyzeWithKMeans(image: strongSelf.img4Anaylsis, count: 5).map{$0.color}
+            var colors = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 5).map{$0.color}
             var record = [UIColor: Int]()
             var dups = [Int]()
             for i in 0 ..< colors.count {

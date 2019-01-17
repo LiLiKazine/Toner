@@ -37,7 +37,7 @@ class PieChartViewController: BaseTonerViewController {
 
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
-            let ratios: [(color: UIColor, ratio: Double)] = Tools.analyzeWithKMeans(image: strongSelf.img4Anaylsis, count: 5)
+            let ratios: [(color: UIColor, ratio: Double)] = Tools.analyzeWithKMeans(image: strongSelf.shrink, count: 5)
 
             let dataEntries = ratios.map { (color, ratio) -> PieChartDataEntry in
                 let entry = PieChartDataEntry(value: ratio, label: color.hexValue())
