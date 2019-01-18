@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toner" translatesAutoresizingMaskIntoConstraints="NO" id="Zmz-IY-ne8">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.93333333333333335" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Zmz-IY-ne8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="0GT-eg-nUo"/>
-                            <constraint firstItem="Zmz-IY-ne8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="42l-TD-aHv"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Zmz-IY-ne8" secondAttribute="bottom" id="ehD-b6-Vn7"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zmz-IY-ne8" secondAttribute="trailing" id="he5-VT-diV"/>
+                            <constraint firstItem="Zmz-IY-ne8" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="0GT-eg-nUo"/>
+                            <constraint firstItem="Zmz-IY-ne8" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="42l-TD-aHv"/>
+                            <constraint firstAttribute="bottom" secondItem="Zmz-IY-ne8" secondAttribute="bottom" id="ehD-b6-Vn7"/>
+                            <constraint firstAttribute="trailing" secondItem="Zmz-IY-ne8" secondAttribute="trailing" id="he5-VT-diV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

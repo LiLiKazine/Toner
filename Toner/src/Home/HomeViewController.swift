@@ -27,9 +27,43 @@ class HomeViewController: BaseTonerViewController {
     }
     
     private var picker: UIImagePickerController!
+    
+    var bgLayer: CALayer?
+    var maskLayer: CAShapeLayer?
+    var animationDuration: TimeInterval = 1.2
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
+        bgLayer = CALayer()
+        bgLayer?.frame = view.layer.frame
+        bgLayer?.backgroundColor = UIColor(hexString: "FFEEEC")?.cgColor
+        bgLayer?.contents = UIImage(named: "toner")?.cgImage
+        bgLayer?.contentsGravity = .resizeAspect
+        
+        view.layer.addSublayer(bgLayer!)
+        let maskRect: CGRect = CGRect(x: -(bgLayer!.bounds.height / 4), y: -(bgLayer!.bounds.height / 4), width: bgLayer!.bounds.height * 1.5, height: bgLayer!.bounds.height * 1.5)
+        let rectPath = UIBezierPath(rect: maskRect)
+//        let roundPath =
+//            UIBezierPath(ovalIn: CGRect(origin: CGPoint(x: maskRect.origin.x + maskRect.width * 0.5 - 50, y: maskRect.origin.y + maskRect.height * 0.5 - 50), size: CGSize(width: 100, height: 100)))
+//            UIBezierPath(ovalIn: CGRect(origin: CGPoint(x: bgLayer!.position.x - 50, y: bgLayer!.position.y - 50), size: CGSize(width: 100, height: 100)))
+        let starPath = UIBezierPath()
+        starPath.starPathInRect(rect: CGRect(origin: CGPoint(x: maskRect.origin.x + maskRect.width * 0.5 - 50, y: maskRect.origin.y + maskRect.height * 0.5 - 50), size: CGSize(width: 100, height: 100)))
+        
+        let bezierPath = UIBezierPath()
+        bezierPath.append(rectPath)
+        bezierPath.append(starPath)
+        
+        maskLayer = CAShapeLayer()
+        maskLayer?.path = bezierPath.cgPath
+        maskLayer?.fillColor = UIColor.white.cgColor
+        maskLayer?.fillRule = .evenOdd
+        maskLayer?.bounds = maskRect
+        maskLayer?.position = bgLayer!.position
+//        maskLayer?.anchorPoint = view.center
+
+        bgLayer?.mask = maskLayer
+        
 
         picker = UIImagePickerController()
         picker.delegate = self
@@ -38,6 +72,41 @@ class HomeViewController: BaseTonerViewController {
         picker.navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
                                                     .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+//        let revealAnimation = CABasicAnimation(keyPath: "transform")
+//        revealAnimation.fromValue = NSValue(caTransform3D: CATransform3DIdentity)
+//        revealAnimation.toValue = NSValue(caTransform3D: CATransform3DMakeScale(45, 45, 1.0))
+//        revealAnimation.duration = animationDuration
+//        revealAnimation.fillMode = .forwards
+//        revealAnimation.isRemovedOnCompletion = false
+//
+        let revealAnimation = CAKeyframeAnimation(keyPath: "transform")
+        revealAnimation.values = [NSValue(caTransform3D: CATransform3DIdentity), NSValue(caTransform3D: CATransform3DMakeScale(0.7, 0.7, 1.0)), NSValue(caTransform3D: CATransform3DIdentity), NSValue(caTransform3D: CATransform3DMakeScale(25, 25, 1.0))]
+        revealAnimation.keyTimes = [0.0, 0.2, 0.4, 1.0]
+        revealAnimation.timingFunctions = [CAMediaTimingFunction(name: .easeOut), CAMediaTimingFunction(name: .linear), CAMediaTimingFunction(name: .easeIn)]
+        
+        let spinAnimation = CAKeyframeAnimation(keyPath: "transform.rotation")
+        spinAnimation.values = [0.0, CGFloat.pi/2, CGFloat.pi, -CGFloat.pi/2, 0.0]
+        spinAnimation.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+        spinAnimation.calculationMode = .paced
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.animations = [revealAnimation, spinAnimation]
+        animationGroup.duration = animationDuration
+        animationGroup.fillMode = .forwards
+        animationGroup.isRemovedOnCompletion = false
+
+        maskLayer?.add(animationGroup, forKey: nil)
+        
+        UIView.animate(withDuration: animationDuration * 0.5, delay: animationDuration * 0.5, options: .curveEaseOut, animations: {
+            self.navigationController?.isNavigationBarHidden = false
+        }, completion: nil)
+
+
     }
     
     @IBAction func itemActions(_ sender: UIBarButtonItem) {
