@@ -10,6 +10,7 @@
 		0905BA7521BACC8F008A5933 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905BA7421BACC8F008A5933 /* Tools.swift */; };
 		0966DC0221F1B737006DCFDC /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */; };
 		0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */; };
+		0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0521F1EE2A006DCFDC /* Global.swift */; };
 		09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */; };
 		09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */; };
 		09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435D821B96B6A0023B405 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 		0905BA7421BACC8F008A5933 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
 		0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
+		0966DC0521F1EE2A006DCFDC /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 		09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		09B435D521B96B6A0023B405 /* Toner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 				09E0140721BCD4EA009785FD /* KMeans.swift */,
 				09E0140921BCD948009785FD /* Vector.swift */,
 				0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */,
+				0966DC0521F1EE2A006DCFDC /* Global.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */,
 				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
 				09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */,
+				0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */,
 				09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */,
 				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,
 				09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */,
