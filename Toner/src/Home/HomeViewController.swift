@@ -26,7 +26,9 @@ class HomeViewController: BaseTonerViewController {
         }
     }
     
-    private var picker: UIImagePickerController!
+    var picker: UIImagePickerController!
+    
+    let rotatePresentTransition = RotatePresentTransition()
     
     var bgLayer: CALayer?
     var maskLayer: CAShapeLayer?
@@ -41,6 +43,7 @@ class HomeViewController: BaseTonerViewController {
         }
 
         picker = UIImagePickerController()
+        picker.transitioningDelegate = self
         picker.delegate = self
         picker.sourceType = .photoLibrary
         picker.allowsEditing = false
@@ -161,6 +164,27 @@ extension HomeViewController: CAAnimationDelegate {
             IS_START_UP = false
         }
 
+    }
+    
+}
+
+
+extension HomeViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if presented == picker && source == self {
+            rotatePresentTransition.presenting = true
+            return rotatePresentTransition
+        }
+        return nil
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if dismissed == picker {
+            rotatePresentTransition.presenting = false
+            return rotatePresentTransition
+        }
+        return nil
     }
     
 }
