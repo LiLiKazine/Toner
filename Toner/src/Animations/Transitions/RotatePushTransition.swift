@@ -31,6 +31,8 @@ class RotatePushTransition: NSObject, UIViewControllerAnimatedTransitioning {
             return
         }
 
+        toView.layer.shouldRasterize = true
+        toView.layer.rasterizationScale = UIScreen.main.scale
         
         let size: CGSize = fromView.frame.size
 
@@ -68,10 +70,11 @@ class RotatePushTransition: NSObject, UIViewControllerAnimatedTransitioning {
             fromView.layer.opacity = 0.2
         }) { _ in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            toView.layer.shouldRasterize = false
             if !self.pushing {
                 toView.layer.anchorPoint.x = 1.0
-                print("toView frame after: \(toView.frame)")
-                print("fromView frame after: \(fromView.frame)")
+//                print("toView frame after: \(toView.frame)")
+//                print("fromView frame after: \(fromView.frame)")
 
             }
         }

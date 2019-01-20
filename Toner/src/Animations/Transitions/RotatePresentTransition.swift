@@ -27,6 +27,9 @@ class RotatePresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
             return
         }
         
+        toView.layer.shouldRasterize = true
+        toView.layer.rasterizationScale = UIScreen.main.scale
+        
         let size:CGSize = fromView.frame.size
         
         var identity = CATransform3DIdentity
@@ -77,6 +80,7 @@ class RotatePresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
                 //TODO: Do not know wht exactly I have to add this, yet it worked.
                 toView.layer.anchorPoint.y = 2.0
             }
+            toView.layer.shouldRasterize = false
             print("toView frame after: \(toView.frame)")
             print("fromView frame after: \(fromView.frame)")
 
