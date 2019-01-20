@@ -29,6 +29,7 @@ class HomeViewController: BaseTonerViewController {
     var picker: UIImagePickerController!
     
     let rotatePresentTransition = RotatePresentTransition()
+    let rotatePushTransition = RotatePushTransition()
     
     var bgLayer: CALayer?
     var maskLayer: CAShapeLayer?
@@ -41,7 +42,9 @@ class HomeViewController: BaseTonerViewController {
             prepareStartUp()
 
         }
-
+        
+        navigationController?.delegate = self
+        
         picker = UIImagePickerController()
         picker.transitioningDelegate = self
         picker.delegate = self
@@ -51,6 +54,15 @@ class HomeViewController: BaseTonerViewController {
                                                     .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
        
     }
+    
+    func openPicker() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            
+            self.present(picker, animated: true, completion: nil)
+        }
+    }
+    
+
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -68,10 +80,7 @@ class HomeViewController: BaseTonerViewController {
     }
     
     @IBAction func btnActions(_ sender: UIButton) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-           
-            self.present(picker, animated: true, completion: nil)
-        }
+        openPicker()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -153,6 +162,11 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        rotatePushTransition.operation = operation
+        return rotatePushTransition
+    }
 }
 
 extension HomeViewController: CAAnimationDelegate {
@@ -187,4 +201,5 @@ extension HomeViewController: UIViewControllerTransitioningDelegate {
         return nil
     }
     
+
 }

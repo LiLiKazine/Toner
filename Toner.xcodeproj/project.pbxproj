@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0905BA7521BACC8F008A5933 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0905BA7421BACC8F008A5933 /* Tools.swift */; };
+		0913B7FD21F4551800A93AEA /* RotatePushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0913B7FC21F4551800A93AEA /* RotatePushTransition.swift */; };
 		0966DC0221F1B737006DCFDC /* AnimatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */; };
 		0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */; };
 		0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0521F1EE2A006DCFDC /* Global.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0905BA7421BACC8F008A5933 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		0913B7FC21F4551800A93AEA /* RotatePushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatePushTransition.swift; sourceTree = "<group>"; };
 		0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorFactory.swift; sourceTree = "<group>"; };
 		0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
 		0966DC0521F1EE2A006DCFDC /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				096772EE21F2FDE4002A1E6E /* RotatePresentTransition.swift */,
+				0913B7FC21F4551800A93AEA /* RotatePushTransition.swift */,
 			);
 			path = Transitions;
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
 				09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */,
 				096772EF21F2FDE4002A1E6E /* RotatePresentTransition.swift in Sources */,
+				0913B7FD21F4551800A93AEA /* RotatePushTransition.swift in Sources */,
 				0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */,
 				09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */,
 				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,

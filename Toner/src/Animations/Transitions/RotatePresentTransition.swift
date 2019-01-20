@@ -9,16 +9,12 @@
 
 import UIKit
 
-class RotatePresentTransition: UIPercentDrivenInteractiveTransition, UIViewControllerAnimatedTransitioning {
+class RotatePresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     let animationDuration: TimeInterval = 0.4
     
     var presenting: Bool = true
-    
-    func handlePan(_ recognizer: UIPanGestureRecognizer) {
-        
-    }
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return animationDuration
     }
@@ -27,6 +23,7 @@ class RotatePresentTransition: UIPercentDrivenInteractiveTransition, UIViewContr
         
         let container = transitionContext.containerView
         guard let fromView = transitionContext.view(forKey: .from), let toView = transitionContext.view(forKey: .to) else {
+            transitionContext.completeTransition(true)
             return
         }
         
@@ -35,9 +32,10 @@ class RotatePresentTransition: UIPercentDrivenInteractiveTransition, UIViewContr
         var identity = CATransform3DIdentity
         fromView.layer.transform = identity
         toView.layer.transform = identity
-        identity.m34 = -1.0/1000
+        identity.m34 = -1.0/500
         
-        container.insertSubview(toView, aboveSubview: fromView)
+//        container.insertSubview(toView, aboveSubview: fromView)
+        container.insertSubview(toView, belowSubview: fromView)
    
         fromView.layer.anchorPoint.y = presenting ? 1.0: 0.0
         fromView.layer.frame.origin.y = 0
@@ -50,16 +48,16 @@ class RotatePresentTransition: UIPercentDrivenInteractiveTransition, UIViewContr
 //        print("offsetY: \(toViewOffsetY)")
 //        print("ty: \(toView.frame.origin.y)")
         
-        print("fromView frame before: \(fromView.frame)")
-        print("toView frame before: \(toView.frame)")
+//        print("fromView frame before: \(fromView.frame)")
+//        print("toView frame before: \(toView.frame)")
 
         let prepareAngle: CGFloat = presenting ? .pi * -0.5 : .pi * 0.5
         let prepareRotation = CATransform3DRotate(identity, prepareAngle, 1.0, 0.0, 0.0)
         toView.layer.transform = prepareRotation
         toView.layer.opacity = 0.2
-        print("toView frame prepare: \(toView.frame)")
+//        print("toView frame prepare: \(toView.frame)")
         let move = presenting ? -size.height : size.height
-        print("move: \(move)")
+//        print("move: \(move)")
         let offset = CATransform3DMakeTranslation(0.0, move, 0.0)
         let rotateOutAngle: CGFloat = presenting ? .pi * 0.5 : .pi * -0.5
         let rotationOut = CATransform3DRotate(identity, rotateOutAngle, 1.0, 0.0, 0.0)
@@ -87,11 +85,4 @@ class RotatePresentTransition: UIPercentDrivenInteractiveTransition, UIViewContr
         
     }
     
-    func animationEnded(_ transitionCompleted: Bool) {
-
-        print("ended")
-        
-    }
-   
-
 }
