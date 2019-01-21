@@ -81,8 +81,8 @@ class RotatePresentTransition: NSObject, UIViewControllerAnimatedTransitioning {
                 toView.layer.anchorPoint.y = 2.0
             }
             toView.layer.shouldRasterize = false
-            print("toView frame after: \(toView.frame)")
-            print("fromView frame after: \(fromView.frame)")
+//            print("toView frame after: \(toView.frame)")
+//            print("fromView frame after: \(fromView.frame)")
 
         }
         

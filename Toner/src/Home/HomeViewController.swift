@@ -13,7 +13,25 @@ class HomeViewController: BaseTonerViewController {
 
     
     @IBOutlet weak var analysisItem: UIBarButtonItem!
-    @IBOutlet weak var targetImg: UIImageView!
+    @IBOutlet weak var maskView: UIView!
+   
+    @IBOutlet weak var imgScrollView: UIScrollView! {
+        didSet {
+            imgScrollView.layer.cornerRadius = 15
+            imgScrollView.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var targetImg: UIImageView! {
+        didSet {
+            targetImg.layer.cornerRadius = 15
+            targetImg.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var imgTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imgLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imgTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imgBottomConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var imgAuthorLbl: UILabel!
     @IBOutlet weak var importBtn: UIButton! {
         didSet {
@@ -38,6 +56,12 @@ class HomeViewController: BaseTonerViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let exampleImg = UIImage(named: "ExampleImage")!
+        setImage(exampleImg)
+
+        
+        imgScrollView.delegate = self
+        
         if IS_START_UP {
             prepareStartUp()
 
@@ -52,7 +76,69 @@ class HomeViewController: BaseTonerViewController {
         picker.allowsEditing = false
         picker.navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
                                                     .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
-       
+        
+        
+
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateMinZoomScale(for: imgScrollView.bounds.size)
+
+    }
+    
+//    var roundCornerMask: CAShapeLayer?
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        updateMinZoomScale(for: imgScrollView.bounds.size)
+
+
+//        if let sublayers = maskView.layer.sublayers, let roundCornerMask = self.roundCornerMask {
+//            sublayers.forEach { layer in
+//                if layer == roundCornerMask {
+//                    layer.removeFromSuperlayer()
+//                }
+//            }
+//        }
+//
+//        roundCornerMask = CAShapeLayer()
+//        roundCornerMask?.bounds = maskView.frame
+//        roundCornerMask?.fillColor = UIColor.white.cgColor
+//        roundCornerMask?.fillRule = .evenOdd
+//        print(maskView.bounds.size)
+//        let path = UIBezierPath(rect: CGRect(origin: CGPoint.zero, size: maskView.bounds.size))
+//        path.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 12, y: 0), size: CGSize(width: maskView.bounds.width - 24, height: maskView.bounds.height)), cornerRadius: 15))
+//
+//        roundCornerMask?.path = path.cgPath
+//        view.layer.addSublayer(roundCornerMask!)
+//        maskView.layer.mask = roundCornerMask
+//        roundCornerMask!.position = imgScrollView.layer.position
+      
+    }
+    
+    func updateConstraints(forSize size: CGSize) {
+        let yOffset = max(0, (size.height - targetImg.frame.height) / 2)
+        imgTopConstraint.constant = yOffset
+        imgBottomConstraint.constant = yOffset
+        
+        let xOffset = max(0, (size.width - targetImg.frame.width) / 2)
+        imgLeadingConstraint.constant = xOffset
+        imgTrailingConstraint.constant = xOffset
+        
+        view.layoutIfNeeded()
+    }
+
+    func updateMinZoomScale(for size: CGSize) {
+        let widthScale = size.width / targetImg.bounds.width
+        let heightScale = size.height / targetImg.bounds.height
+        let minScale = min(widthScale, heightScale)
+        let maxScale = max(widthScale, heightScale)
+        imgScrollView.minimumZoomScale = minScale
+        imgScrollView.zoomScale = maxScale
+        let contentSize = imgScrollView.contentSize
+        imgScrollView.contentOffset = CGPoint(x: contentSize.width/2 - size.width/2, y: contentSize.height/2 - size.height/2)
     }
     
     func openPicker() {
@@ -62,6 +148,10 @@ class HomeViewController: BaseTonerViewController {
         }
     }
     
+    func setImage(_ image: UIImage) {
+        targetImg.image = image
+        view.layoutIfNeeded()
+    }
 
     
     override func viewDidAppear(_ animated: Bool) {
@@ -158,7 +248,7 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
         imgAuthorLbl.isHidden = true
 //        if let image = info[.editedImage] as? UIImage {
         if let image = info[.originalImage] as? UIImage {
-            targetImg.image = image
+            setImage(image)
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -203,3 +293,21 @@ extension HomeViewController: UIViewControllerTransitioningDelegate {
     
 
 }
+
+extension HomeViewController: UIScrollViewDelegate {
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        if scrollView == imgScrollView {
+            return targetImg
+        }
+        return nil
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if scrollView == imgScrollView {
+            updateConstraints(forSize: imgScrollView.bounds.size)
+        }
+    }
+    
+}
+
