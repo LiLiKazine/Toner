@@ -19,11 +19,28 @@ class AnalysisViewController: BaseTonerViewController {
             saveItem.tintColor = MAIN_TINT
         }
     }
+    @IBOutlet weak var colorStackContainerView: UIView! {
+        didSet {
+            colorStackContainerView.layer.cornerRadius = 8.0
+            colorStackContainerView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var colorStack: UIStackView!
     @IBOutlet weak var colorValueStack: UIStackView!
-    @IBOutlet weak var avgColorView: UIView!
+    @IBOutlet weak var avgColorView: UIView! {
+        didSet {
+            avgColorView.layer.cornerRadius = 24
+            avgColorView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var avgColorValueLbl: UILabel!
-    @IBOutlet weak var targetImgView: UIImageView!
+    @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var targetImgView: UIImageView! {
+        didSet {
+            targetImgView.layer.cornerRadius = 15
+            targetImgView.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var scrollView: UIScrollView!
     
     var img4Anaylsis: UIImage!
@@ -42,8 +59,10 @@ class AnalysisViewController: BaseTonerViewController {
         colorValueStack.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
         
         let imgWidth = img4Anaylsis.size.width
+        let ratio = img4Anaylsis.size.height / imgWidth
+        imgHeightConstraint.constant = targetImgView.bounds.width * ratio
 
-        print(imgWidth)
+//        print(imgWidth)
         shrink = img4Anaylsis.shrink(target: imgWidth > 800.0 ? 800.0 : imgWidth)
         
         targetImgView.image = img4Anaylsis
@@ -99,6 +118,9 @@ class AnalysisViewController: BaseTonerViewController {
     }
     
     private func setAvg() {
+        
+        
+        
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             let avg = AverageColorFromImage(strongSelf.shrink)
@@ -113,6 +135,7 @@ class AnalysisViewController: BaseTonerViewController {
     }
     
     private func setStack() {
+
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -138,29 +161,39 @@ class AnalysisViewController: BaseTonerViewController {
                 strongSelf.colorStack.hideSkeleton()
                 strongSelf.colorValueStack.hideSkeleton()
                 
-                colors.forEach{ color in
-                    let patch = UIView()
-                    patch.backgroundColor = color
-                    strongSelf.colorStack.addArrangedSubview(patch)
-                    patch.snp.makeConstraints{make in
-                        let width = Int(strongSelf.colorStack.bounds.width) / colors.count
-                        let height = strongSelf.colorStack.bounds.height
-                        make.width.equalTo(width)
-                        make.height.equalTo(height)
-                    }
-                    let val = UILabel()
-                    val.textAlignment = .center
-                    val.textColor = COLOR_BROWN
+                for (idx, color) in colors.enumerated() {
+                    
+                    let patch = strongSelf.colorStack.viewWithTag(idx+1)
+                    let val = strongSelf.colorValueStack.viewWithTag(idx+1) as! UILabel
+                    patch?.backgroundColor = color
                     val.text = color.hexValue()
-                    val.font = UIFont.systemFont(ofSize: SIZE_ANNOTATION)
-                    strongSelf.colorValueStack.addArrangedSubview(val)
-                    val.snp.makeConstraints{ make in
-                        let width = Int(strongSelf.colorValueStack.bounds.width) / colors.count
-                        let height = strongSelf.colorValueStack.bounds.height
-                        make.width.equalTo(width)
-                        make.height.equalTo(height)
-                    }
+                    
                 }
+                
+                
+//                colors.forEach{ color in
+//                    let patch = UIView()
+//                    patch.backgroundColor = color
+//                    strongSelf.colorStack.addArrangedSubview(patch)
+//                    patch.snp.makeConstraints{make in
+//                        let width = Int(strongSelf.colorStack.bounds.width) / colors.count
+//                        let height = strongSelf.colorStack.bounds.height
+//                        make.width.equalTo(width)
+//                        make.height.equalTo(height)
+//                    }
+//                    let val = UILabel()
+//                    val.textAlignment = .center
+//                    val.textColor = COLOR_BROWN
+//                    val.text = color.hexValue()
+//                    val.font = UIFont.systemFont(ofSize: SIZE_ANNOTATION)
+//                    strongSelf.colorValueStack.addArrangedSubview(val)
+//                    val.snp.makeConstraints{ make in
+//                        let width = Int(strongSelf.colorValueStack.bounds.width) / colors.count
+//                        let height = strongSelf.colorValueStack.bounds.height
+//                        make.width.equalTo(width)
+//                        make.height.equalTo(height)
+//                    }
+//                }
             }
             
         }
