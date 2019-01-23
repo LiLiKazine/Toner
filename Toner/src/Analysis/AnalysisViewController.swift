@@ -10,7 +10,6 @@ import UIKit
 import ChameleonFramework
 import SnapKit
 import Photos
-import SkeletonView
 
 class AnalysisViewController: BaseTonerViewController {
 
@@ -25,6 +24,8 @@ class AnalysisViewController: BaseTonerViewController {
             colorStackContainerView.clipsToBounds = true
         }
     }
+    @IBOutlet weak var colorStackContainerMiddleView: UIView!
+    @IBOutlet weak var colorValueContainerView: UIView!
     @IBOutlet weak var colorStack: UIStackView!
     @IBOutlet weak var colorValueStack: UIStackView!
     @IBOutlet weak var avgColorView: UIView! {
@@ -47,16 +48,12 @@ class AnalysisViewController: BaseTonerViewController {
     
     var shrink: UIImage!
     
+    var replicator: CAReplicatorLayer?
     
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        view.showAnimatedGradientSkeleton()
-        let gradient = SkeletonGradient(baseColor: MAIN_TINT_DARK)
-        colorStack.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
-        colorValueStack.showAnimatedGradientSkeleton(usingGradient: gradient, animation: nil)
         
         let imgWidth = img4Anaylsis.size.width
         let ratio = img4Anaylsis.size.height / imgWidth
@@ -75,7 +72,7 @@ class AnalysisViewController: BaseTonerViewController {
         
     }
     @IBAction func itemAction(_ sender: UIBarButtonItem) {
-        
+        // Save screen shot
         UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, false, 0.0)
 
         let savedContentOffset = scrollView.contentOffset
@@ -104,6 +101,7 @@ class AnalysisViewController: BaseTonerViewController {
     }
     
     private func showSaveAlbumAlert(isSuccess: Bool, err: Error?) {
+        // Request authorization
         let title = isSuccess ? "Succeeded" : "Failed"
         let tip = isSuccess ? "Successfully Saved Photo to Album." : err?.localizedDescription
         let alertController = UIAlertController(title: title,
@@ -120,22 +118,67 @@ class AnalysisViewController: BaseTonerViewController {
     private func setAvg() {
         
         
-        
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             let avg = AverageColorFromImage(strongSelf.shrink)
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
+                strongSelf.avgColorView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 strongSelf.avgColorView.backgroundColor = avg
                 strongSelf.avgColorValueLbl.text = avg.hexValue()
+                UIView.animate(withDuration: 0.7, animations: {
+                    strongSelf.avgColorView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                })
             }
             
         }
         
     }
     
-    private func setStack() {
 
+    private func setStack() {
+        
+
+        //Scaling loading animation
+        replicator = CAReplicatorLayer()
+        guard let replicator = replicator else {
+            return
+        }
+        let line = CALayer()
+        replicator.frame = colorStackContainerView.bounds
+        replicator.masksToBounds = true
+        colorStackContainerView.layer.addSublayer(replicator)
+        
+        line.frame = CGRect(x: 0, y: colorStackContainerView.bounds.height/2-4.0, width: 8.0, height: 8.0)
+        line.backgroundColor = COLOR_BROWN!.cgColor
+        line.cornerRadius = 2
+        line.opacity = 0.2
+        
+        replicator.addSublayer(line)
+        // Should be 10 = 8width + 2offset, set to 9 to produce a bit more lines, to fill the view.
+        replicator.instanceCount = Int(colorStackContainerView.bounds.width / 9)
+        replicator.instanceTransform = CATransform3DMakeTranslation(10, 0, 0)
+        replicator.instanceDelay = 0.02
+        
+        let scale = CABasicAnimation(keyPath: "transform")
+        scale.fromValue = NSValue(caTransform3D: CATransform3DIdentity)
+        scale.toValue = NSValue(caTransform3D: CATransform3DMakeScale(0.7, 8, 1.0))
+        
+        let opacity = CABasicAnimation(keyPath: "opacity")
+        opacity.fromValue = 0.4
+        opacity.toValue = 1.0
+        
+
+        let group = CAAnimationGroup()
+        group.animations = [scale, opacity]
+        group.duration = 0.4
+        group.repeatCount = .infinity
+        group.autoreverses = true
+        group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+
+        line.add(group, forKey: "line")
+        // -- animation
+        
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
             
@@ -155,45 +198,51 @@ class AnalysisViewController: BaseTonerViewController {
             dups.forEach{ idx in
                 colors.remove(at: idx)
             }
+        
             DispatchQueue.main.async {  [weak self] in
                 guard let strongSelf = self else { return }
                 
-                strongSelf.colorStack.hideSkeleton()
-                strongSelf.colorValueStack.hideSkeleton()
+                // Hide Colors
+                let colorMaskLayer = CAShapeLayer()
+                let colorMaskPath = UIBezierPath(rect: CGRect(x: 0, y: strongSelf.colorStackContainerMiddleView.bounds.height/2-1, width: strongSelf.colorStackContainerMiddleView.bounds.width, height: 0))
+                colorMaskLayer.path = colorMaskPath.cgPath
+                colorMaskLayer.fillColor = UIColor.white.cgColor
+                strongSelf.colorStackContainerMiddleView.layer.mask = colorMaskLayer
+                // Animate out Colors
+                let newPath = UIBezierPath(rect: strongSelf.colorStackContainerMiddleView.bounds)
+                let expand = CABasicAnimation(keyPath: "path")
+                expand.toValue = newPath.cgPath
+                expand.duration = 0.4
+                expand.fillMode = .forwards
+                expand.isRemovedOnCompletion = false
+                expand.beginTime = CACurrentMediaTime() + 0.4
+                expand.delegate = self
+                expand.setValue("expand", forKey: "id")
+                colorMaskLayer.add(expand, forKey: nil)
+                // Stop scaling loading animation
+                let cease = CABasicAnimation(keyPath: "transform")
+                cease.delegate = self
+                cease.toValue = NSValue(caTransform3D: CATransform3DMakeScale(0.01, 0.01, 1.0))
+                cease.duration = 0.4
+                cease.isRemovedOnCompletion = false
+                cease.fillMode = .forwards
+                cease.setValue("cease", forKey: "id")
+                line.add(cease, forKey: "cease")
                 
+                // Bring out color hex value
+                strongSelf.colorValueContainerView.alpha = 0.0
+                UIView.animate(withDuration: 0.8, animations: {
+                    self?.colorValueContainerView.alpha = 1.0
+                })
+
                 for (idx, color) in colors.enumerated() {
-                    
+
                     let patch = strongSelf.colorStack.viewWithTag(idx+1)
                     let val = strongSelf.colorValueStack.viewWithTag(idx+1) as! UILabel
                     patch?.backgroundColor = color
                     val.text = color.hexValue()
-                    
+
                 }
-                
-                
-//                colors.forEach{ color in
-//                    let patch = UIView()
-//                    patch.backgroundColor = color
-//                    strongSelf.colorStack.addArrangedSubview(patch)
-//                    patch.snp.makeConstraints{make in
-//                        let width = Int(strongSelf.colorStack.bounds.width) / colors.count
-//                        let height = strongSelf.colorStack.bounds.height
-//                        make.width.equalTo(width)
-//                        make.height.equalTo(height)
-//                    }
-//                    let val = UILabel()
-//                    val.textAlignment = .center
-//                    val.textColor = COLOR_BROWN
-//                    val.text = color.hexValue()
-//                    val.font = UIFont.systemFont(ofSize: SIZE_ANNOTATION)
-//                    strongSelf.colorValueStack.addArrangedSubview(val)
-//                    val.snp.makeConstraints{ make in
-//                        let width = Int(strongSelf.colorValueStack.bounds.width) / colors.count
-//                        let height = strongSelf.colorValueStack.bounds.height
-//                        make.width.equalTo(width)
-//                        make.height.equalTo(height)
-//                    }
-//                }
             }
             
         }
@@ -275,4 +324,21 @@ fileprivate extension UIScrollView {
         
         return image
     }
+}
+
+extension AnalysisViewController: CAAnimationDelegate {
+    
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if let id = anim.value(forKey: "id") as? String, id == "cease", let rep = replicator {
+                rep.removeAllAnimations()
+                rep.removeFromSuperlayer()
+        }
+        
+        if let id = anim.value(forKey: "id") as? String, id == "expand" {
+            colorStackContainerView.layer.mask = nil
+        }
+        
+    }
+    
 }

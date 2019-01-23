@@ -9,7 +9,7 @@ import UIKit
 
 extension UIBezierPath {
     
-    func starPathInRect(rect: CGRect){
+    func starPathInRect(rect: CGRect) {
         
         let starExtrusion:CGFloat = 30.0
         
@@ -44,6 +44,21 @@ extension UIBezierPath {
         self.close()
         
 //        return path
+    }
+    
+    func sectorPathInRect(rect: CGRect, startAngle: CGFloat, endAngle: CGFloat) {
+        let origin: CGPoint = rect.origin
+        let size: CGSize = rect.size
+        let center: CGPoint = CGPoint(x: origin.x+size.width/2, y: origin.y+size.height/2)
+        self.move(to: center)
+        let start = pointFrom(angle: startAngle, radius: size.height/2, offset: center)
+        self.addLine(to: start)
+        self.move(to: center)
+        let end = pointFrom(angle: endAngle, radius: size.height/2, offset: center)
+        self.addLine(to: end)
+        let arcPath = UIBezierPath(arcCenter: center, radius: size.height/2, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+        self.append(arcPath)
+        
     }
     
     func pointFrom(angle: CGFloat, radius: CGFloat, offset: CGPoint) -> CGPoint {

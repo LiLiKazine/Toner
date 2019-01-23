@@ -13,6 +13,7 @@
 		0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */; };
 		0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0966DC0521F1EE2A006DCFDC /* Global.swift */; };
 		096772EF21F2FDE4002A1E6E /* RotatePresentTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096772EE21F2FDE4002A1E6E /* RotatePresentTransition.swift */; };
+		0972DE6621F7FF3800E1DD94 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0972DE6521F7FF3800E1DD94 /* ChartView.swift */; };
 		09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */; };
 		09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */; };
 		09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435D821B96B6A0023B405 /* AppDelegate.swift */; };
@@ -37,6 +38,7 @@
 		0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathExtension.swift; sourceTree = "<group>"; };
 		0966DC0521F1EE2A006DCFDC /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		096772EE21F2FDE4002A1E6E /* RotatePresentTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatePresentTransition.swift; sourceTree = "<group>"; };
+		0972DE6521F7FF3800E1DD94 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 		09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		09B435D521B96B6A0023B405 /* Toner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toner.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,6 +178,7 @@
 			children = (
 				09D5564A21BA98E60056D40E /* AnalysisViewController.swift */,
 				09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */,
+				0972DE6521F7FF3800E1DD94 /* ChartView.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -293,14 +296,12 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Toner/Pods-Toner-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +321,7 @@
 				09E0140821BCD4EA009785FD /* KMeans.swift in Sources */,
 				09B435DB21B96B6A0023B405 /* HomeViewController.swift in Sources */,
 				09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */,
+				0972DE6621F7FF3800E1DD94 /* ChartView.swift in Sources */,
 				0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */,
 				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
 				09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */,
