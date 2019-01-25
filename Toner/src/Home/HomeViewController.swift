@@ -77,9 +77,6 @@ class HomeViewController: BaseTonerViewController {
         picker.navigationBar.titleTextAttributes = [.foregroundColor: MAIN_TINT_DARK,
                                                     .font: UIFont.systemFont(ofSize: 27, weight: .bold)]
         
-        
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -88,34 +85,11 @@ class HomeViewController: BaseTonerViewController {
 
     }
     
-//    var roundCornerMask: CAShapeLayer?
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 //        updateMinZoomScale(for: imgScrollView.bounds.size)
 
-
-//        if let sublayers = maskView.layer.sublayers, let roundCornerMask = self.roundCornerMask {
-//            sublayers.forEach { layer in
-//                if layer == roundCornerMask {
-//                    layer.removeFromSuperlayer()
-//                }
-//            }
-//        }
-//
-//        roundCornerMask = CAShapeLayer()
-//        roundCornerMask?.bounds = maskView.frame
-//        roundCornerMask?.fillColor = UIColor.white.cgColor
-//        roundCornerMask?.fillRule = .evenOdd
-//        print(maskView.bounds.size)
-//        let path = UIBezierPath(rect: CGRect(origin: CGPoint.zero, size: maskView.bounds.size))
-//        path.append(UIBezierPath(roundedRect: CGRect(origin: CGPoint(x: 12, y: 0), size: CGSize(width: maskView.bounds.width - 24, height: maskView.bounds.height)), cornerRadius: 15))
-//
-//        roundCornerMask?.path = path.cgPath
-//        view.layer.addSublayer(roundCornerMask!)
-//        maskView.layer.mask = roundCornerMask
-//        roundCornerMask!.position = imgScrollView.layer.position
-      
     }
     
     func updateConstraints(forSize size: CGSize) {

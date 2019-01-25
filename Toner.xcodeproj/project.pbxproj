@@ -43,6 +43,7 @@
 		09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 		09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		09AFBDB021FAF19900C111BE /* SpreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadView.swift; sourceTree = "<group>"; };
+		09AFBDB621FB0D3500C111BE /* Toner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Toner-Bridging-Header.h"; sourceTree = "<group>"; };
 		09B435D521B96B6A0023B405 /* Toner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B435D821B96B6A0023B405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B435DA21B96B6A0023B405 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 				0905BA7421BACC8F008A5933 /* Tools.swift */,
 				0966DC0121F1B737006DCFDC /* AnimatorFactory.swift */,
 				0966DC0521F1EE2A006DCFDC /* Global.swift */,
+				09AFBDB621FB0D3500C111BE /* Toner-Bridging-Header.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -237,6 +239,7 @@
 				TargetAttributes = {
 					09B435D421B96B690023B405 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -482,6 +485,7 @@
 			baseConfigurationReference = AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TUBC4SD5QM;
@@ -494,6 +498,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kazine.lili.Toner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Toner/src/Toner-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -504,6 +510,7 @@
 			baseConfigurationReference = F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TUBC4SD5QM;
@@ -516,6 +523,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kazine.lili.Toner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Toner/src/Toner-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

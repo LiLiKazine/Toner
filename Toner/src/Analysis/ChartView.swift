@@ -60,7 +60,7 @@ class ChartView: UIView {
             let color = data.color
             let angle = (startAngle+endAngle)/2
             let less = angle.truncatingRemainder(dividingBy: (2 * .pi))
-            let percent = 1 - (abs(.pi - less) / (.pi * 1.5))
+            let percent = 1 - (abs(.pi - less) / (.pi * 1.2))
 //            print(percent)
 
             let val: NSString = NSString(format: "%.2f%%", data.ratio*100)
