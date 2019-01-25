@@ -16,6 +16,7 @@
 		0972DE6621F7FF3800E1DD94 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0972DE6521F7FF3800E1DD94 /* ChartView.swift */; };
 		09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */; };
 		09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */; };
+		09AFBDB121FAF19900C111BE /* SpreadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09AFBDB021FAF19900C111BE /* SpreadView.swift */; };
 		09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435D821B96B6A0023B405 /* AppDelegate.swift */; };
 		09B435DB21B96B6A0023B405 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B435DA21B96B6A0023B405 /* HomeViewController.swift */; };
 		09B435DE21B96B6A0023B405 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09B435DC21B96B6A0023B405 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		0972DE6521F7FF3800E1DD94 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartViewController.swift; sourceTree = "<group>"; };
 		09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		09AFBDB021FAF19900C111BE /* SpreadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadView.swift; sourceTree = "<group>"; };
 		09B435D521B96B6A0023B405 /* Toner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09B435D821B96B6A0023B405 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09B435DA21B96B6A0023B405 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				09D5564A21BA98E60056D40E /* AnalysisViewController.swift */,
 				09A6A6BC21BBDFBC00140AFA /* PieChartViewController.swift */,
 				0972DE6521F7FF3800E1DD94 /* ChartView.swift */,
+				09AFBDB021FAF19900C111BE /* SpreadView.swift */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 				0913B7FD21F4551800A93AEA /* RotatePushTransition.swift in Sources */,
 				0966DC0621F1EE2A006DCFDC /* Global.swift in Sources */,
 				09B435F021B972B90023B405 /* BaseTonerViewController.swift in Sources */,
+				09AFBDB121FAF19900C111BE /* SpreadView.swift in Sources */,
 				09B435F221B972DD0023B405 /* BaseTonerNavigationController.swift in Sources */,
 				09A6A6BD21BBDFBC00140AFA /* PieChartViewController.swift in Sources */,
 				09B435ED21B96EA50023B405 /* Contants.swift in Sources */,

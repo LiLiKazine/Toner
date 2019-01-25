@@ -48,10 +48,6 @@ class AnalysisViewController: BaseTonerViewController {
     
     var shrink: UIImage!
     
-    var replicator: CAReplicatorLayer?
-    
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,30 +60,28 @@ class AnalysisViewController: BaseTonerViewController {
         
         targetImgView.image = img4Anaylsis
 
-        
         setStack()
         
         setAvg()
         
-        
     }
-    @IBAction func itemAction(_ sender: UIBarButtonItem) {
-        // Save screen shot
+    
+    func screenShot() {
         UIGraphicsBeginImageContextWithOptions(scrollView.contentSize, false, 0.0)
-
-        let savedContentOffset = scrollView.contentOffset
-        let savedFrame = scrollView.frame
-
-        scrollView.contentOffset = CGPoint.zero
-        scrollView.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
-
+        
+        let savedSize = scrollView.frame.size
+        scrollView.frame.size = scrollView.contentSize
+        
         scrollView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
-
-        scrollView.contentOffset = savedContentOffset
-        scrollView.frame = savedFrame
-
+        
         UIGraphicsEndImageContext()
+        
+        scrollView.frame.size = savedSize
+        UIView.animate(withDuration: 0.4) {
+            self.scrollView.contentOffset = CGPoint.zero
+        }
+        
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: image!)
         }) { (isSuccess: Bool, error: Error?) in
@@ -98,6 +92,17 @@ class AnalysisViewController: BaseTonerViewController {
                 print(error!.localizedDescription)
             }
         }
+    }
+    
+    @IBAction func itemAction(_ sender: UIBarButtonItem) {
+        // Save screen shot
+
+        UIView.animate(withDuration: 0.4, animations: {
+            self.scrollView.contentOffset = CGPoint.zero
+        }) { _ in
+            self.screenShot()
+        }
+        
     }
     
     private func showSaveAlbumAlert(isSuccess: Bool, err: Error?) {
@@ -140,10 +145,8 @@ class AnalysisViewController: BaseTonerViewController {
         
 
         //Scaling loading animation
-        replicator = CAReplicatorLayer()
-        guard let replicator = replicator else {
-            return
-        }
+        let replicator = CAReplicatorLayer()
+
         let line = CALayer()
         replicator.frame = colorStackContainerView.bounds
         replicator.masksToBounds = true
@@ -228,6 +231,7 @@ class AnalysisViewController: BaseTonerViewController {
                 cease.isRemovedOnCompletion = false
                 cease.fillMode = .forwards
                 cease.setValue("cease", forKey: "id")
+                cease.setValue(replicator, forKey: "layer")
                 line.add(cease, forKey: "cease")
                 
                 // Bring out color hex value
@@ -331,13 +335,14 @@ extension AnalysisViewController: CAAnimationDelegate {
     
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        if let id = anim.value(forKey: "id") as? String, id == "cease", let rep = replicator {
-                rep.removeAllAnimations()
-                rep.removeFromSuperlayer()
+        if let id = anim.value(forKey: "id") as? String, id == "cease", let layer = anim.value(forKey: "layer") as? CALayer {
+                layer.removeAllAnimations()
+                layer.removeFromSuperlayer()
         }
         
         if let id = anim.value(forKey: "id") as? String, id == "expand" {
             colorStackContainerView.layer.mask = nil
+            colorStackContainerMiddleView.layer.mask = nil
         }
         
     }

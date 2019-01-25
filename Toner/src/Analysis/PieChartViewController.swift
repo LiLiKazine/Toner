@@ -21,14 +21,9 @@ class PieChartViewController: BaseTonerViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        let notificationCenter = NotificationCenter.default
-//        notificationCenter.addObserver(self, selector: #selector(appMovedToForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-//        notificationCenter.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
-        
         let imgWidth = img4Anaylsis.size.width
         shrink = img4Anaylsis.shrink(target: imgWidth > 800.0 ? 800.0 : imgWidth)
-        
+
         let loading = UILabel(frame: pieView.bounds)
         loading.textAlignment = .center
         loading.text = "loading..."
@@ -37,7 +32,7 @@ class PieChartViewController: BaseTonerViewController {
         loading.backgroundColor = .clear
         loading.layer.opacity = 0.2
         pieView.addSubview(loading)
-        
+
         let twinkle = CABasicAnimation(keyPath: "opacity")
         twinkle.fromValue = 0.2
         twinkle.toValue = 1.0
@@ -47,10 +42,10 @@ class PieChartViewController: BaseTonerViewController {
         // in case animation stops when go into background mode
         twinkle.isRemovedOnCompletion = false
         loading.layer.add(twinkle, forKey: nil)
-        
-        
+
+
         let radius = min(pieView.bounds.width, pieView.bounds.height)
-        
+
         let ovalLayer = CAShapeLayer()
         ovalLayer.frame = pieView.bounds
         ovalLayer.fillColor = UIColor.clear.cgColor
@@ -64,18 +59,18 @@ class PieChartViewController: BaseTonerViewController {
         let strokeStartAnimation = CABasicAnimation(keyPath: "strokeStart")
         strokeStartAnimation.fromValue = -0.5
         strokeStartAnimation.toValue = 1.0
-        
+
         let strokeEndAnimation = CABasicAnimation(keyPath: "strokeEnd")
         strokeEndAnimation.fromValue = 0.0
         strokeEndAnimation.toValue = 1.0
-        
+
         let strokeAnimationGroup = CAAnimationGroup()
         strokeAnimationGroup.duration = 1.5
         strokeAnimationGroup.repeatCount = .infinity
         // in case animation stops when go into background mode
         strokeAnimationGroup.isRemovedOnCompletion = false
         strokeAnimationGroup.animations = [strokeStartAnimation, strokeEndAnimation]
-        
+
         ovalLayer.add(strokeAnimationGroup, forKey: nil)
         
         DispatchQueue.global().async { [weak self] in
@@ -85,7 +80,7 @@ class PieChartViewController: BaseTonerViewController {
            
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
-                
+
                 let endStrokerHead = CABasicAnimation(keyPath: "strokeStart")
                 endStrokerHead.toValue = 0
                 let endStrokeTail = CABasicAnimation(keyPath: "strokeEnd")
@@ -99,7 +94,7 @@ class PieChartViewController: BaseTonerViewController {
                 endStrokeGroup.fillMode = .forwards
                 endStrokeGroup.isRemovedOnCompletion = false
                 ovalLayer.add(endStrokeGroup, forKey: nil)
-                
+
                 let endTwinkle = CABasicAnimation(keyPath: "opacity")
                 endTwinkle.setValue("twinkle", forKey: "id")
                 endTwinkle.setValue(loading, forKey: "view")
@@ -124,6 +119,9 @@ class PieChartViewController: BaseTonerViewController {
                 chart.layer.mask = maskLayer
 
                 let drawChartAnim = CABasicAnimation(keyPath: "strokeEnd")
+                drawChartAnim.delegate = self
+                drawChartAnim.setValue("mask", forKey: "id")
+                drawChartAnim.setValue(chart.layer, forKey: "layer")
                 drawChartAnim.fromValue = 0
                 drawChartAnim.toValue = 1.0
                 drawChartAnim.duration = 0.7
@@ -133,6 +131,9 @@ class PieChartViewController: BaseTonerViewController {
                 maskLayer.add(drawChartAnim, forKey: nil)
                 
                 strongSelf.pieView.addSubview(chart)
+                
+                let spread = SpreadView(frame: CGRect(x: 0, y: strongSelf.view.bounds.height * 0.9, width: strongSelf.view.bounds.width, height: strongSelf.view.bounds.height * 0.1), colors: ratios.compactMap{ return $0.color })
+                strongSelf.view.addSubview(spread)
                 
 //                strongSelf.taskDone()
             }
@@ -178,6 +179,9 @@ extension PieChartViewController: CAAnimationDelegate {
         if let id = anim.value(forKey: "id") as? String, id == "twinkle", let view = anim.value(forKey: "view") as? UIView {
             view.layer.removeAllAnimations()
             view.removeFromSuperview()
+        }
+        if let id = anim.value(forKey: "id") as? String, id == "mask", let layer = anim.value(forKey: "layer") as? CALayer {
+            layer.mask = nil
         }
     }
     

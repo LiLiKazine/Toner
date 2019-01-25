@@ -352,7 +352,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPK-5w-xPB">
-                                <rect key="frame" x="42" y="42" width="253.5" height="253.5"/>
+                                <rect key="frame" x="59" y="59" width="219.5" height="219.5"/>
                                 <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JPK-5w-xPB" secondAttribute="height" multiplier="1:1" id="xlJ-c1-FzI"/>
@@ -361,7 +361,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="JPK-5w-xPB" firstAttribute="width" secondItem="yVh-QO-wa7" secondAttribute="width" multiplier="0.75" id="0Mk-VL-sEY"/>
+                            <constraint firstItem="JPK-5w-xPB" firstAttribute="width" secondItem="yVh-QO-wa7" secondAttribute="width" multiplier="0.65" id="0Mk-VL-sEY"/>
                             <constraint firstItem="JPK-5w-xPB" firstAttribute="centerY" secondItem="yVh-QO-wa7" secondAttribute="centerY" id="6Wo-ip-3oX"/>
                             <constraint firstItem="JPK-5w-xPB" firstAttribute="centerX" secondItem="yVh-QO-wa7" secondAttribute="centerX" id="Noh-e0-XdH"/>
                         </constraints>
@@ -373,7 +373,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LSb-W9-LVN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2475" y="686"/>
+            <point key="canvasLocation" x="2473.5999999999999" y="685.45727136431788"/>
         </scene>
     </scenes>
     <resources>

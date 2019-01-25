@@ -38,7 +38,7 @@ class ChartView: UIView {
         let radius: CGFloat = min(size.width, size.height)/2
         let center = CGPoint(x: origin.x+size.width/2, y: origin.y+size.height/2)
         var startAngle: CGFloat = CGFloat(drand48()) * 2 * .pi
-        var temp: [(startAngle: CGFloat, endAngle: CGFloat, color: UIColor)] = []
+        var temp: [(startAngle: CGFloat, endAngle: CGFloat, color: UIColor, ratio: Double)] = []
         for content in contents {
             let angle: CGFloat = CGFloat(content.ratio) * 2 * .pi
             let endAngle = startAngle + angle
@@ -51,7 +51,7 @@ class ChartView: UIView {
             path.close()
             content.color.setFill()
             path.fill()
-            temp.append((startAngle, endAngle, content.color))
+            temp.append((startAngle, endAngle, content.color, content.ratio))
             startAngle = endAngle
         }
         for data in temp {
@@ -63,7 +63,7 @@ class ChartView: UIView {
             let percent = 1 - (abs(.pi - less) / (.pi * 1.5))
 //            print(percent)
 
-            let val: NSString = color.hexValue() as NSString
+            let val: NSString = NSString(format: "%.2f%%", data.ratio*100)
             let point = getPoint(radius: radius * percent, angle: angle, offset: center)
 //            print(point)
             val.draw(at: point, withAttributes: [.foregroundColor: ContrastColorOf(color, returnFlat: true), .font: UIFont.systemFont(ofSize: 12)])
