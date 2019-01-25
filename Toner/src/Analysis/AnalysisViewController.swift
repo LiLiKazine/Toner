@@ -175,7 +175,8 @@ class AnalysisViewController: BaseTonerViewController {
         group.repeatCount = .infinity
         group.autoreverses = true
         group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-
+        // in case animation stops when go into background mode
+        group.isRemovedOnCompletion = false
         line.add(group, forKey: "line")
         // -- animation
         

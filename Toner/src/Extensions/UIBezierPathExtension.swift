@@ -53,11 +53,10 @@ extension UIBezierPath {
         self.move(to: center)
         let start = pointFrom(angle: startAngle, radius: size.height/2, offset: center)
         self.addLine(to: start)
-        self.move(to: center)
-        let end = pointFrom(angle: endAngle, radius: size.height/2, offset: center)
-        self.addLine(to: end)
-        let arcPath = UIBezierPath(arcCenter: center, radius: size.height/2, startAngle: startAngle, endAngle: endAngle, clockwise: true)
-        self.append(arcPath)
+        self.addArc(withCenter: center, radius: size.height/2, startAngle: startAngle, endAngle: endAngle, clockwise: true)
+//        let end = pointFrom(angle: endAngle, radius: size.height/2, offset: center)
+        self.addLine(to: center)
+        self.close()
         
     }
     
