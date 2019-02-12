@@ -8,7 +8,6 @@
 
 import UIKit
 import ChameleonFramework
-import SnapKit
 import Photos
 
 class AnalysisViewController: BaseTonerViewController {

@@ -133,7 +133,11 @@ class PieChartViewController: BaseTonerViewController {
                 strongSelf.pieView.addSubview(chart)
                 
                 let spread = SpreadView(frame: CGRect(x: 0, y: strongSelf.view.bounds.height * 0.9, width: strongSelf.view.bounds.width, height: strongSelf.view.bounds.height * 0.1), colors: ratios.compactMap{ return $0.color })
+                spread.alpha = 0.0
                 strongSelf.view.addSubview(spread)
+                UIView.animate(withDuration: 0.7, animations: {
+                    spread.alpha = 1.0
+                }, completion: nil)
                 
 //                strongSelf.taskDone()
             }

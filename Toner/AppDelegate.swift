@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window?.backgroundColor = UIColor.flatGray
+        
+        UMConfigure.initWithAppkey("5c4ad37fb465f566a600019f", channel: "App Store")
+        
+
+        
         return true
     }
 
