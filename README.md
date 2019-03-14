@@ -10,7 +10,7 @@ swift version of color analyzer
 
 ### Save Result
 
-<img src="Toner Demo.2019-03-13 22_59_09.gif" width="225" height="641" />
+<img src="IMG_4127.JPG" width="225" height="641" />
 
 ### License
 
