@@ -8,6 +8,10 @@ swift version of color analyzer
 
 <img src="Toner Demo.2019-03-13 22_59_09.gif" width="221.5" height="480" />
 
+### Save Result
+
+<img src="Toner Demo.2019-03-13 22_59_09.gif" width="225" height="641" />
+
 ### License
 
 MIT
