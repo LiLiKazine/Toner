@@ -66,7 +66,7 @@ class ChartView: UIView {
             let val: NSString = NSString(format: "%.2f%%", data.ratio*100)
             let point = getPoint(radius: radius * percent, angle: angle, offset: center)
 //            print(point)
-            val.draw(at: point, withAttributes: [.foregroundColor: ContrastColorOf(color, returnFlat: true), .font: UIFont.systemFont(ofSize: 12)])
+            val.draw(at: point, withAttributes: [.foregroundColor: UIColor(contrastingBlackOrWhiteColorOn: color, isFlat: true), .font: UIFont.systemFont(ofSize: 12)])
         }
         
     }

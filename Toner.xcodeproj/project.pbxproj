@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D5564A21BA98E60056D40E /* AnalysisViewController.swift */; };
 		09E0140821BCD4EA009785FD /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0140721BCD4EA009785FD /* KMeans.swift */; };
 		09E0140A21BCD948009785FD /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E0140921BCD948009785FD /* Vector.swift */; };
+		74C2F7032E66C1240009D7FF /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C2F7022E66C11E0009D7FF /* UIColorExtension.swift */; };
 		E8CAB9F3867A58951EBC0355 /* Pods_Toner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B32017B551B806B7928DF98 /* Pods_Toner.framework */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		09D5564A21BA98E60056D40E /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		09E0140721BCD4EA009785FD /* KMeans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
 		09E0140921BCD948009785FD /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		74C2F7022E66C11E0009D7FF /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8B32017B551B806B7928DF98 /* Pods_Toner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Toner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4B5B0EE886C8E651D3A5DE /* Pods-Toner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.debug.xcconfig"; sourceTree = "<group>"; };
 		F65BBC1A9C93ED8B669C28B0 /* Pods-Toner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Toner/Pods-Toner.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			children = (
 				09A6A6BF21BC1E0100140AFA /* UIImageExtension.swift */,
 				0966DC0321F1CD28006DCFDC /* UIBezierPathExtension.swift */,
+				74C2F7022E66C11E0009D7FF /* UIColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,13 +301,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Toner/Pods-Toner-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toner/Pods-Toner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Toner/Pods-Toner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -325,6 +327,7 @@
 				09B435D921B96B6A0023B405 /* AppDelegate.swift in Sources */,
 				0972DE6621F7FF3800E1DD94 /* ChartView.swift in Sources */,
 				0966DC0421F1CD28006DCFDC /* UIBezierPathExtension.swift in Sources */,
+				74C2F7032E66C1240009D7FF /* UIColorExtension.swift in Sources */,
 				09A6A6C021BC1E0100140AFA /* UIImageExtension.swift in Sources */,
 				09D5564B21BA98E60056D40E /* AnalysisViewController.swift in Sources */,
 				096772EF21F2FDE4002A1E6E /* RotatePresentTransition.swift in Sources */,

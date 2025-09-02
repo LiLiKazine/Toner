@@ -124,12 +124,12 @@ class AnalysisViewController: BaseTonerViewController {
         
         DispatchQueue.global().async { [weak self] in
             guard let strongSelf = self else { return }
-            let avg = AverageColorFromImage(strongSelf.shrink)
+            let avg = UIColor(averageColorFrom: strongSelf.shrink)
             DispatchQueue.main.async { [weak self] in
                 guard let strongSelf = self else { return }
                 strongSelf.avgColorView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                 strongSelf.avgColorView.backgroundColor = avg
-                strongSelf.avgColorValueLbl.text = avg.hexValue()
+                strongSelf.avgColorValueLbl.text = avg?.hexValue()
                 UIView.animate(withDuration: 0.7, animations: {
                     strongSelf.avgColorView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                 })

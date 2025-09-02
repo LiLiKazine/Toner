@@ -6,8 +6,7 @@ target 'Toner' do
   use_frameworks!
 
   # Pods for Toner
-    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
-    pod 'UMCCommon'
-    pod 'UMCAnalytics'
+#    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'ChameleonFramework'
 
 end

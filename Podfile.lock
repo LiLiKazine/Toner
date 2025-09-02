@@ -1,35 +1,18 @@
 PODS:
+  - ChameleonFramework (2.1.0):
+    - ChameleonFramework/Default (= 2.1.0)
   - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
-    - ChameleonFramework/Default
-  - UMCAnalytics (6.0.1):
-    - UMCCommon
-  - UMCCommon (2.0.0)
 
 DEPENDENCIES:
-  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
-  - UMCAnalytics
-  - UMCCommon
+  - ChameleonFramework
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - UMCAnalytics
-    - UMCCommon
-
-EXTERNAL SOURCES:
-  ChameleonFramework:
-    :git: https://github.com/ViccAlexander/Chameleon.git
-
-CHECKOUT OPTIONS:
-  ChameleonFramework:
-    :commit: 6dd284bde21ea2e7f9fd89bc36f40df16e16369d
-    :git: https://github.com/ViccAlexander/Chameleon.git
+  trunk:
+    - ChameleonFramework
 
 SPEC CHECKSUMS:
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
-  UMCAnalytics: c267acd9bb4a87e5f01735c158b63a617908f92e
-  UMCCommon: 79b5a614c958db367113eed5740109d9a98e1223
 
-PODFILE CHECKSUM: fdd8a7b5a9e532ef5e1137f60c8e2b2aff46e868
+PODFILE CHECKSUM: 1890e4781553b93cce7b4c8300bab29e099aa14c
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.16.2

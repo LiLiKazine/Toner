@@ -39,7 +39,7 @@ class SpreadView: UIView {
             colors[i].setFill()
             path.fill()
             let val: NSString = colors[i].hexValue() as NSString
-            val.draw(in: CGRect(x: x+secHeight+4, y: y, width: secWidth-secHeight-4, height: secHeight), withAttributes: [.foregroundColor: ContrastColorOf(COLOR_CONTENT_BACKGROUND!, returnFlat: true)])
+            val.draw(in: CGRect(x: x+secHeight+4, y: y, width: secWidth-secHeight-4, height: secHeight), withAttributes: [.foregroundColor: UIColor.init(contrastingBlackOrWhiteColorOn: COLOR_CONTENT_BACKGROUND!, isFlat: true)])
             
         }
         
